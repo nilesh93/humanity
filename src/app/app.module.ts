@@ -19,7 +19,9 @@ import { SideMenu } from '../pages/side-menu/side-menu';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      mode: 'md'
+    }),
     LoginPageModule,
     AddsPageModule,
     TabsModule,
