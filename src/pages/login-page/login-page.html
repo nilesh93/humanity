@@ -1,4 +1,4 @@
-<ion-content padding class="login">
+<ion-content padding class="login fixed-content">
 
 
 
@@ -8,10 +8,27 @@
     </ion-col>
   </ion-row>
 
-  <ion-row style=" padding-top:2% ">
+  <ion-row style=" padding-top:60% ">
+
+
+    <!--<ion-col style="padding-right:0cm">
+      <button class="button-full button-outline btn-group "  style="background-color:transparent" ion-button color="yellow"   icon-only>
+  <ion-icon name="exit"></ion-icon>
+  
+</button>
+    </ion-col>
+    <ion-col style="padding-left:0cm">
+      <button class="button-full button-outline btn-group" ion-button color="yellow" style="background-color:transparent"  icon-only>
+  <ion-icon name="person-add"></ion-icon>
+   
+</button>
+    </ion-col>
+
+  </ion-row>
+  <ion-row>-->
     <ion-col id="login-box">
       <form>
-        <ion-list>
+        <!--<ion-list>
           <ion-item style="background: transparent;">
             <ion-label>
               <ion-icon name="ios-mail-outline"></ion-icon>
@@ -24,35 +41,31 @@
             </ion-label>
             <ion-input type="password" placeholder="Password"></ion-input>
           </ion-item>
-        </ion-list>
+        </ion-list>-->
 
-        <button style="margin-left:1%" ion-button color="blue" (click)="doLogin()">Log in</button>
-
+        <button style="margin-left:1%" ion-button color="fb" (click)="doLogin()">
+            <ion-icon name="facebook"></ion-icon>
+          Login with Facebook
+          </button>
+        <button style="margin-left:1%" ion-button color="google" (click)="doLogin()">Login with Google</button>
       </form>
     </ion-col>
   </ion-row>
 
 
-  <img src="assets/img/or-trans.png">
+  <!--<img src="assets/img/or-trans.png">
   <ion-row>
     <ion-col >
       <button style="    width: 96%;margin-left:1%" ion-button color="yellow" class="sign-up" (click)="doLogin()">Sign Up</button>
     </ion-col>
   </ion-row>
-  <!--<ion-row>
-    <ion-col col-10 offset-1 padding style="padding-top:0cm;padding-bottom:0cm">
-      <a href="#">Don't have an account? Sign Up</a>
-    </ion-col>
-    <ion-col padding>
-
-    </ion-col>
-  </ion-row>-->
+  
 
   <ion-row>
     <ion-col col-6 offset-3 padding style="padding-top:0cm;padding-bottom:0cm">
       <a href="#">Forgot Password?</a>
     </ion-col>
-  </ion-row>
+  </ion-row>-->
 
 
 

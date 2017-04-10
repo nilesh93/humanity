@@ -1,27 +1,24 @@
-import { SideMenu } from './../side-menu/side-menu';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the LoginPage page.
+ * Generated class for the AddsPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
 @IonicPage()
 @Component({
-  selector: 'page-login-page',
-  templateUrl: 'login-page.html',
+  selector: 'page-adds-page',
+  templateUrl: 'adds-page.html',
 })
-export class LoginPage {
+export class AddsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    console.log('ionViewDidLoad AddsPage');
   }
-  doLogin() {
-    this.navCtrl.setRoot(SideMenu, {}, { animate: true, direction: 'forward' });
-  }
+
 }

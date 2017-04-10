@@ -1,3 +1,6 @@
+import { CausesPageModule } from './../pages/causes-page/causes-page.module';
+import { TabsModule } from './../pages/tabs/tabs.module';
+import { AddsPageModule } from './../pages/adds-page/adds-page.module';
 import { LoginPageModule } from './../pages/login-page/login-page.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -6,22 +9,26 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+import { SideMenu } from '../pages/side-menu/side-menu';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    SideMenu,
+
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    LoginPageModule
+    LoginPageModule,
+    AddsPageModule,
+    TabsModule,
+    CausesPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    SideMenu
   ],
   providers: [
     StatusBar,

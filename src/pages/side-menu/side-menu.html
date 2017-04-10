@@ -1,0 +1,63 @@
+<ion-menu [content]="content">
+
+
+    <ion-content class="outer-content" no-border-top>
+
+        <div class="sidebar-header header-cover" style="background-image: url(http://2.bp.blogspot.com/-2RewSLZUzRg/U-9o6SD4M6I/AAAAAAAADIE/voax99AbRx0/s1600/14%2B-%2B1%2B%281%29.jpg);">
+
+            <ion-row>
+                <ion-col>
+                    <div class="sidebar-image">
+                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/53474/atom_profile_01.jpg">
+                    </div>
+                </ion-col>
+                <ion-col>
+                    <a class="sidebar-brand">
+            john.doe@gmail.com
+            <b class="caret"></b>
+             </a>
+                </ion-col>
+            </ion-row>
+
+
+
+
+        </div>
+
+        <ion-list no-lines>
+            <ion-list-header>
+                Actions
+            </ion-list-header>
+            <ion-item menuClose>
+                History
+                <ion-icon name="ios-arrow-forward-outline" item-right></ion-icon>
+            </ion-item>
+            <ion-item menuClose>
+                Social Media
+                <ion-icon name="ios-arrow-forward-outline" item-right></ion-icon>
+            </ion-item>
+            <ion-item menuClose>
+                Settings
+                <ion-icon name="ios-arrow-forward-outline" item-right></ion-icon>
+            </ion-item>
+
+
+
+            <ion-list-header>
+                Explore
+            </ion-list-header>
+            <ion-item menuClose>
+                Help
+            </ion-item>
+            <ion-item menuClose>
+                About Us
+            </ion-item>
+
+        </ion-list>
+
+
+    </ion-content>
+</ion-menu>
+
+
+<ion-nav [root]="sideBarPage" #content swipeBackEnabled="false"></ion-nav>
