@@ -10,7 +10,16 @@ page-home {
   transition: all 0.2s ease-in-out;
 }
  
+ .side-list .item-md{
+   background-color: transparent;
+ }
  
  
- 
+ .side{
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+ }
 }

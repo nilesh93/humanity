@@ -1,55 +1,39 @@
 <ion-menu [content]="content">
 
-    <ion-header>
 
-        <ion-navbar color="md-blue">
-
-            <ion-title>
-                Humanity
-            </ion-title>
+    <ion-content class="side" style=" background-image: url('assets/img/login-background.png')">
 
 
-        </ion-navbar>
+        <ion-list class="side-list" no-lines color="md-blue">
 
-    </ion-header>
-    <ion-content class="outer-content" no-border-top>
+            <a ion-item>
+                <ion-avatar item-left>
+                    <img src="http://freelogozone.com/Data/Logo/preview-dcstaraelogoblack.png">
+                </ion-avatar>
+                <h2>Hello</h2>
+                <h3>Nilesh Jayanandana</h3>
+                <button ion-button block round outline color="md-blue"> Rs. 2000.00</button>
+            </a>
 
-        <div class="sidebar-header header-cover" style="background-image: url(http://2.bp.blogspot.com/-2RewSLZUzRg/U-9o6SD4M6I/AAAAAAAADIE/voax99AbRx0/s1600/14%2B-%2B1%2B%281%29.jpg);">
-
-            <ion-row>
-                <ion-col>
-                    <div class="sidebar-image">
-                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/53474/atom_profile_01.jpg">
-                    </div>
-                </ion-col>
-                <ion-col>
-                    <a class="sidebar-brand">
-            john.doe@gmail.com
-            <b class="caret"></b>
-             </a>
-                </ion-col>
-            </ion-row>
-
-
-
-
-        </div>
-
-        <ion-list no-lines>
             <ion-list-header>
-                Actions
+                Menu
             </ion-list-header>
-            <ion-item menuClose>
-                History
+            <a (click)="navigate('Home')" ion-item menuClose>
+                Home
                 <ion-icon name="ios-arrow-forward-outline" item-right></ion-icon>
-            </ion-item>
-            <ion-item menuClose>
-                Social Media
+            </a>
+            <a (click)="navigate('Leaderboard')" ion-item menuClose>
+                Leaderboards
                 <ion-icon name="ios-arrow-forward-outline" item-right></ion-icon>
-            </ion-item>
-            <ion-item menuClose>
-                Settings
+            </a>
+            <a ion-item menuClose>
+                Donations
                 <ion-icon name="ios-arrow-forward-outline" item-right></ion-icon>
+            </a>
+
+            <ion-item>
+                <ion-label>Notifications</ion-label>
+                <ion-toggle [(ngModel)]="notification" color="md-blue"></ion-toggle>
             </ion-item>
 
 
@@ -59,9 +43,11 @@
             </ion-list-header>
             <ion-item menuClose>
                 Help
+                <ion-icon name="ios-arrow-forward-outline" item-right></ion-icon>
             </ion-item>
             <ion-item menuClose>
                 About Us
+                <ion-icon name="ios-arrow-forward-outline" item-right></ion-icon>
             </ion-item>
 
         </ion-list>

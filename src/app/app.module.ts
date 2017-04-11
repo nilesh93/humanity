@@ -1,3 +1,4 @@
+import { LeaderboardPageModule } from './../pages/leaderboard-page/leaderboard-page.module';
 import { ViewAddModalModule } from './../pages/view-add-modal/view-add-modal.module';
 import { CausesPageModule } from './../pages/causes-page/causes-page.module';
 import { TabsModule } from './../pages/tabs/tabs.module';
@@ -27,7 +28,8 @@ import { SideMenu } from '../pages/side-menu/side-menu';
     AddsPageModule,
     TabsModule,
     CausesPageModule,
-    ViewAddModalModule
+    ViewAddModalModule,
+    LeaderboardPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
