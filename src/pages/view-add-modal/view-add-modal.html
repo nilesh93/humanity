@@ -1,0 +1,63 @@
+<!--
+  Generated template for the ViewAddModal page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="md-blue">
+    <ion-title>Advertisemnt</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="dismiss()">
+      Close
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-avatar item-left>
+        <img src="https://static.festisite.com/static/partylogo/img/logos/burger-king.png">
+      </ion-avatar>
+      <h2>Burger King</h2>
+      <h3>Cheese Burger Promo</h3>
+    </ion-item>
+  </ion-list>
+  <video *ngIf="bool" [controls]="false" preload="metadata" [autoplay]="true"   class="videoPlayer">
+    <source src="http://player.vimeo.com/external/85569724.sd.mp4?s=43df5df0d733011263687d20a47557e4" type="video/mp4" />
+  </video>
+  <img *ngIf="!bool" src="assets/img/video-not-available.gif" class="videoPlayer" alt="">
+  <ion-list>
+    <ion-item *ngIf="!bool">
+      <button ion-button block round outline color="primary">Watch again in 24:00 hours</button>
+    </ion-item>
+    <ion-item *ngIf="bool" no-lines>
+      <button ion-button block round outline color="md-blue">Watch now and earn Rs. 2.00</button>
+    </ion-item>
+    <ion-list-header style="margin-bottom:0cm">
+      Advertisement Details
+    </ion-list-header>
+
+    <button ion-item>
+    <ion-icon name="play" item-left></ion-icon>
+      Rs. 2.00 per View
+  </button>
+    <button ion-item>
+    <ion-icon name="eye" item-left></ion-icon>
+      48 Views
+  </button>
+    <button ion-item>
+    <ion-icon name="card" item-left></ion-icon>
+      Rs. 2,480.00 / 14,000 Donated
+  </button>
+    <button ion-item>
+    <ion-icon name="clock" item-left></ion-icon>
+      Expires in 2016-02-02
+  </button>
+  </ion-list>
+</ion-content>

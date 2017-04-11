@@ -23,26 +23,32 @@
 
 <ion-content style="background-color:#F5F5F5">
 
-  <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)" color="md-blue">
+    <ion-refresher-content ></ion-refresher-content>
   </ion-refresher>
 
   <ion-list>
-    <a ion-item>
+
+    <button ion-item>
       <ion-avatar item-left>
         <img src="https://static.festisite.com/static/partylogo/img/logos/burger-king.png">
       </ion-avatar>
       <h2>Burger King</h2>
       <h3>Cheese Burger Promo</h3>
-      <button>08:00 mins</button> <button>RS:2.00</button>
-    </a>
+     <button ion-button round outline  color="md-blue" >08:00</button> <button ion-button round outline color="md-blue">RS 2.00</button>
+    <button ion-button outline color="md-dark" item-right (click)="viewAdd(true)" style="padding-left:1rem;padding-right:1rem;">Watch</button>
+
+    </button>
     <a ion-item>
       <ion-avatar item-left>
         <img src="http://freelogozone.com/Data/Logo/preview-dcstaraelogoblack.png">
       </ion-avatar>
       <h2>Dolce Gabbana</h2>
       <h3>Purse Promo</h3>
-      <button>08:00 mins</button> <button>RS:2.00</button>
+      <button ion-button round outline color="md-blue">08:00</button>
+      <button ion-button round outline color="md-blue">RS 2.00</button>
+      <button ion-button outline color="md-dark" item-right (click)="viewAdd(false)" style="padding-left:1rem;padding-right:1rem;">Watch</button>
+
     </a>
     <a ion-item>
       <ion-avatar item-left>
@@ -50,7 +56,18 @@
       </ion-avatar>
       <h2>Dialog</h2>
       <h3>DTV Promotion</h3>
-      <button>08:00 mins</button> <button>RS:2.00</button>
+      <button ion-button round outline color="md-blue">08:00</button> <button ion-button round outline color="md-blue">RS 2.00</button>
+      <button ion-button outline color="md-dark" item-right (click)="viewAdd()" style="padding-left:1rem;padding-right:1rem;">Watch</button>
+
+    </a>
+    <a ion-item>
+      <ion-avatar item-left>
+        <img src="https://pbs.twimg.com/profile_images/1514269961/Axiata_Tanagram_400x400.jpg">
+      </ion-avatar>
+      <h2>Dialog</h2>
+      <h3>DTV Promotion</h3>
+      <button ion-button round outline color="md-blue">08:00</button> <button ion-button round outline color="md-blue">RS 2.00</button>
+      <button ion-button outline color="md-dark" item-right (click)="viewAdd()" style="padding-left:1rem;padding-right:1rem;">Watch</button>
     </a>
 
   </ion-list>

@@ -1,3 +1,4 @@
+import { ViewAddModalModule } from './../pages/view-add-modal/view-add-modal.module';
 import { CausesPageModule } from './../pages/causes-page/causes-page.module';
 import { TabsModule } from './../pages/tabs/tabs.module';
 import { AddsPageModule } from './../pages/adds-page/adds-page.module';
@@ -14,7 +15,7 @@ import { SideMenu } from '../pages/side-menu/side-menu';
 @NgModule({
   declarations: [
     MyApp,
-    SideMenu,
+    SideMenu
 
   ],
   imports: [
@@ -25,7 +26,8 @@ import { SideMenu } from '../pages/side-menu/side-menu';
     LoginPageModule,
     AddsPageModule,
     TabsModule,
-    CausesPageModule
+    CausesPageModule,
+    ViewAddModalModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
