@@ -12,6 +12,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { SideMenu } from '../pages/side-menu/side-menu';
+import {CauseDetailsModule} from '../pages/cause-details/cause-details.module';
+import {DonatePageModule} from '../pages/donate-page/donate-page.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { SideMenu } from '../pages/side-menu/side-menu';
     TabsModule,
     CausesPageModule,
     ViewAddModalModule,
-    LeaderboardPageModule
+    LeaderboardPageModule,
+    CauseDetailsModule,
+    DonatePageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

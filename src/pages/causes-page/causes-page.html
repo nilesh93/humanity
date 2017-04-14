@@ -4,19 +4,130 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header >
+<ion-header>
 
 
-  <ion-navbar color="md-blue">
-    <button ion-button icon-only menuToggle>
+    <ion-navbar color="md-blue">
+        <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Humanity</ion-title>
-  </ion-navbar>
+        <ion-title>Humanity</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+    <!---->
+
+    <ion-card>
+        <ion-item>
+            <ion-avatar item-left>
+                <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/17241-200.png">
+            </ion-avatar>
+            <h2>Nilesh Jayanandana</h2>
+            <p>November 5, 2016</p>
+        </ion-item>
+
+        <img src="http://www.savelifeindia.org/site/slider/images/slide1.jpg" height="100" width="100" />
+        <!--<img src="https://neuwritesd.files.wordpress.com/2015/09/walkingkidney.gif?w=650" height="100" width="50">-->
+
+        <ion-card-content>
+            <p>Blood Donation Camp: Become a part of a large blood donor network. </p>
+        </ion-card-content>
+        <ion-row>
+            <ion-col>
+                <button ion-button icon-left outline small (click)="gotocause_details()">
+                    <ion-icon name=""></ion-icon>
+                    <div>Details</div>
+                </button>
+            </ion-col>
+            <ion-col>
+                <button ion-button icon-rignt outline small color="dark" (click)="gotodonate_page()">
+                    <ion-icon name=""></ion-icon>
+                    <div>Donate</div>
+                </button>
+            </ion-col>
+            <ion-col center text-center>
+                <ion-note>
+                    11h ago
+                </ion-note>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+
+    <!---->
+    <ion-card>
+        <ion-item>
+            <ion-avatar item-left>
+                <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/17239-200.png">
+            </ion-avatar>
+            <h2>Marty McFly</h2>
+            <p>November 5, 1955</p>
+        </ion-item>
+
+        <img src="https://c.tribune.com.pk/2017/03/government-special-education-complex-29th-march-2017-ayesha-mir-43-1490977283-493-640x480.jpg" height="100" width="100" />
+        <!--<img src="http://static.tumblr.com/6000fe8c138e11a7861aecf6e6b75b23/vsrozov/rYNnnlx4t/tumblr_static_2onu6e0wzcaogg04g8gskkwo0.jpg" height="100" width="100" />-->
+        <!--<img src="https://neuwritesd.files.wordpress.com/2015/09/walkingkidney.gif?w=650" height="100" width="50">-->
+
+        <ion-card-content>
+            <p>Sponsor a Child! Have you ever considered sponsoring a child? </p>
+        </ion-card-content>
+        <ion-row>
+            <ion-col>
+                <button ion-button icon-left outline small (click)="gotocause_details()">
+                    <ion-icon name=""></ion-icon>
+                    <div>Details</div>
+                </button>
+            </ion-col>
+            <ion-col>
+                <button ion-button icon-left outline small color="dark" (click)="gotodonate_page()">
+        <ion-icon name=""></ion-icon>
+        <div>Donate</div>
+      </button>
+            </ion-col>
+            <ion-col center text-center>
+                <ion-note>
+                    11h ago
+                </ion-note>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+
+    <!---->
+    <ion-card>
+        <ion-item>
+            <ion-avatar item-left>
+                <img src="https://neuwritesd.files.wordpress.com/2015/09/walkingkidney.gif?w=650">
+            </ion-avatar>
+            <h2>Dimuthu de Silva</h2>
+            <p>January 5, 2017</p>
+        </ion-item>
+        <img src="http://www.unitypoint.org/desmoines/filesimages/Articles/Des%20Moines/kidney-donation.jpg" height="100" width="100" />
+        <ion-card-content>
+            <p>Save a life with kidney donation </p>
+        </ion-card-content>
+        <ion-row>
+            <ion-col>
+                <button ion-button icon-left outline small (click)="gotocause_details()">
+                    <ion-icon name=""></ion-icon>
+                    <div>Details</div>
+                </button>
+            </ion-col>
+            <ion-col>
+                <button ion-button icon-right outline small color="dark" (click)="gotodonate_page()">
+        <ion-icon name=""></ion-icon>
+        <div>Donate</div>
+      </button>
+            </ion-col>
+            <ion-col center text-center>
+                <ion-note>
+                    11h ago
+                </ion-note>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+
 
 </ion-content>

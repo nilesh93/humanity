@@ -34,6 +34,8 @@ export class AddsPage {
   buttonClick() {
     console.log("clickerd");
   }
+
+  
   public viewAdd(bool) {
 
     let profileModal = this.modalCtrl.create(ViewAddModal, { userId: 8675309, bool: bool });
