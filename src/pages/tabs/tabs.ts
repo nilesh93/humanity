@@ -1,5 +1,6 @@
+import { WatchingCause } from './../watching-cause/watching-cause';
 import { CausesPage } from './../causes-page/causes-page';
-import { AddsPage } from './../adds-page/adds-page';
+// import { AddsPage } from './../adds-page/adds-page';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -16,7 +17,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class Tabs {
 
-  tab1Root = AddsPage;
+  tab1Root = WatchingCause;
   tab2Root = CausesPage;
  
 

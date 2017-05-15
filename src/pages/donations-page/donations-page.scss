@@ -1,0 +1,17 @@
+page-donations-page {
+
+    .numberCircle {
+        border-radius: 50%;
+        background: #BDBDBD;
+        width: 6rem;
+        height: 6rem;
+        font-size: 2rem;
+    }
+
+    .numberCircle span {
+        text-align: center;
+        line-height: 6rem;
+        display: block;
+        color: #fff;
+    }
+}

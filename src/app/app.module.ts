@@ -1,3 +1,5 @@
+import { HomePageModule } from './../pages/home-page/home-page.module';
+import { WatchingCauseModule } from './../pages/watching-cause/watching-cause.module';
 import { LeaderboardPageModule } from './../pages/leaderboard-page/leaderboard-page.module';
 import { ViewAddModalModule } from './../pages/view-add-modal/view-add-modal.module';
 import { CausesPageModule } from './../pages/causes-page/causes-page.module';
@@ -12,8 +14,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { SideMenu } from '../pages/side-menu/side-menu';
-import {CauseDetailsModule} from '../pages/cause-details/cause-details.module';
-import {DonatePageModule} from '../pages/donate-page/donate-page.module';
+import { CauseDetailsModule } from '../pages/cause-details/cause-details.module';
+import { DonatePageModule } from '../pages/donate-page/donate-page.module';
+import { DonationsPageModule } from "../pages/donations-page/donations-page.module";
 
 @NgModule({
   declarations: [
@@ -26,6 +29,7 @@ import {DonatePageModule} from '../pages/donate-page/donate-page.module';
     IonicModule.forRoot(MyApp, {
       mode: 'md'
     }),
+ 
     LoginPageModule,
     AddsPageModule,
     TabsModule,
@@ -33,7 +37,10 @@ import {DonatePageModule} from '../pages/donate-page/donate-page.module';
     ViewAddModalModule,
     LeaderboardPageModule,
     CauseDetailsModule,
-    DonatePageModule
+    DonatePageModule,
+    WatchingCauseModule,
+    DonationsPageModule,
+    HomePageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -1,0 +1,99 @@
+<!--
+  Generated template for the HomePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="md-blue">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>
+      Home
+    </ion-title>
+
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content  style="background-color:#F5F5F5">
+
+  <ion-card>
+    <!--<ion-card-header style="border-bottom:1px solid grey">
+    
+    </ion-card-header>-->
+    <ion-list>
+      <ion-item>
+        <ion-avatar item-left padding>
+          <div class="numberCircle"><span>NJ</span></div>
+        </ion-avatar>
+        <h2>Nilesh Jayanandana</h2>
+        <p> 1 Year and 2 Months </p>
+        <button ion-button round outline color="md-blue">Rs 2,000,000.00</button>
+      </ion-item>
+    </ion-list>
+    <hr>
+    <ion-card-content>
+      <ion-row>
+        <div col-5>
+          <div style="display: block">
+            <canvas baseChart [legend]="false" [labels]="labels" [datasets]="datasets" [colors]="colorsEmptyObject" [chartType]="type"></canvas>
+          </div>
+        </div>
+        <div col-7 padding>
+
+          <ion-row>
+            <div col-3>
+              <div style="background-color:#BDBDBD;width:100%; height:15px"></div>
+            </div>
+            <div col-9>
+              <h5> Earned </h5>
+            </div>
+            <button ion-button small round outline color="grey">Rs 2,000,000.00</button>
+          </ion-row>
+          <ion-row>
+            <div col-3>
+              <div style="background-color:#2196F3;width:100%; height:15px"></div>
+            </div>
+            <div col-9>
+              <h5> Donated </h5>
+            </div>
+            <button ion-button small round outline color="md-blue">Rs 2,000,000.00</button>
+          </ion-row>
+
+
+        </div>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Accomplishments
+    </ion-card-header>
+    <ion-list padding>
+      <ion-item style="border-top:2px solid #F5F5F5">
+
+        <ion-icon name="ribbon" item-left></ion-icon>
+
+        <h2>Mahatma Ghandi</h2>
+        <p> Donated Rs. 50,000</p>
+      </ion-item>
+      <ion-item style="border-top:2px solid #F5F5F5">
+
+        <ion-icon name="ribbon" item-left></ion-icon>
+
+        <h2>BussinessMan</h2>
+        <p> Earned Rs. 50,000</p>
+      </ion-item>
+
+    </ion-list>
+
+
+  </ion-card>
+</ion-content>

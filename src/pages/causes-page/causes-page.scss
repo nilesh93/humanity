@@ -1,3 +1,47 @@
 page-causes-page {
+    ion-card {
+        margin: 0px !important;
+        width: 100% !important;
+        margin-bottom: 8px !important;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(255, 255, 255, 0.0)!important;
+    }
 
+    .numberCircle {
+        border-radius: 50%;
+        background: #BDBDBD;
+        width: 6rem;
+        height: 6rem;
+        font-size: 2rem;
+    }
+
+    .numberCircle span {
+        text-align: center;
+        line-height: 6rem;
+        display: block;
+        color: #fff;
+    }
+
+    .profile-img {
+        width: 7rem;
+        height: 7rem;
+        border-radius: 50%;
+        background: #BDBDBD;
+        font-size: 2.5rem;
+        color: #fff;
+        text-align: center;
+        line-height: 7rem;
+        margin: 0px 0;
+    }
+
+    .item-md {
+        padding-left: 6px !important;
+    }
+
+    p {
+        color: grey !important;
+    }
+
+    .button-md{
+        box-shadow:none !important;
+    }
 }
