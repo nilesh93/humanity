@@ -21,25 +21,29 @@
 </ion-header>
 
 
-<ion-content  style="background-color:#F5F5F5">
-
+<ion-content style="background-color:#F5F5F5">
+  <ion-refresher (ionRefresh)="load($event)" color="md-blue">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-card>
     <!--<ion-card-header style="border-bottom:1px solid grey">
-    
+    Hello
     </ion-card-header>-->
     <ion-list>
       <ion-item>
         <ion-avatar item-left padding>
-          <div class="numberCircle"><span>NJ</span></div>
+          <img [src]="img">
         </ion-avatar>
-        <h2>Nilesh Jayanandana</h2>
-        <p> 1 Year and 2 Months </p>
-        <button ion-button round outline color="md-blue">Rs 2,000,000.00</button>
+        <h2>{{userDetails.name}}</h2>
+        <p> {{dateJoined}} </p>
+        <button ion-button round outline color="md-blue">Rs {{userDetails.points |  number:'1.2-2'}}</button>
       </ion-item>
     </ion-list>
-    <hr>
+  </ion-card>
+  <ion-card>
     <ion-card-content>
-      <ion-row>
+
+      <ion-row *ngIf="userDetailsDidLoad">
         <div col-5>
           <div style="display: block">
             <canvas baseChart [legend]="false" [labels]="labels" [datasets]="datasets" [colors]="colorsEmptyObject" [chartType]="type"></canvas>
@@ -54,7 +58,7 @@
             <div col-9>
               <h5> Earned </h5>
             </div>
-            <button ion-button small round outline color="grey">Rs 2,000,000.00</button>
+            <button ion-button small round outline color="grey">Rs {{userDetails.total_points |  number:'1.2-2'}}</button>
           </ion-row>
           <ion-row>
             <div col-3>
@@ -63,7 +67,7 @@
             <div col-9>
               <h5> Donated </h5>
             </div>
-            <button ion-button small round outline color="md-blue">Rs 2,000,000.00</button>
+            <button ion-button small round outline color="md-blue">Rs {{userDetails.total_donations |  number:'1.2-2'}}</button>
           </ion-row>
 
 

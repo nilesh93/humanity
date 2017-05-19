@@ -18,26 +18,29 @@
 </ion-header>
 
 
-<ion-content>
-  <ion-list>
-    <ion-item>
+<ion-content >
+  <ion-list *ngIf="advert._company">
+    <ion-item >
       <ion-avatar item-left>
-        <img src="https://static.festisite.com/static/partylogo/img/logos/burger-king.png">
+        <img [src]="imgUrl">
       </ion-avatar>
-      <h2>Burger King</h2>
-      <h3>Cheese Burger Promo</h3>
+      <h2>{{advert.title}}</h2>
+      <h3>{{advert._company.name}}</h3>
     </ion-item>
   </ion-list>
-  <video *ngIf="bool" [controls]="false" preload="metadata" [autoplay]="true"   class="videoPlayer">
-    <source src="http://player.vimeo.com/external/85569724.sd.mp4?s=43df5df0d733011263687d20a47557e4" type="video/mp4" />
+  <div *ngIf="advert._company">  
+  <video *ngIf="videoUrl" [controls]="true" preload="metadata" [autoplay]="false" 
+  (ended)="onPlayEnd()" class="videoPlayer">
+    <source [src]="videoUrl" type="video/mp4" />
   </video>
-  <img *ngIf="!bool" src="assets/img/video-not-available.gif" class="videoPlayer" alt="">
-  <ion-list>
-    <ion-item *ngIf="!bool">
-      <button ion-button block round outline color="primary">Watch again in 24:00 hours</button>
+  <img *ngIf="!videoUrl" src="assets/img/video-not-available.gif" class="videoPlayer" alt="">
+  </div>
+  <ion-list *ngIf="advert._company">
+    <ion-item *ngIf="!available.status">
+      <button ion-button block round outline color="primary">Watch again after {{available.available_in | date}}</button>
     </ion-item>
-    <ion-item *ngIf="bool" no-lines>
-      <button ion-button block round outline color="md-blue">Watch now and earn Rs. 2.00</button>
+    <ion-item *ngIf="available.status" no-lines>
+      <button ion-button block round outline color="md-blue">Watch now and earn Rs.{{advert.price_per_view | number:'1.2-2'}}</button>
     </ion-item>
     <ion-list-header style="margin-bottom:0cm">
       Advertisement Details
@@ -45,19 +48,19 @@
 
     <button ion-item>
     <ion-icon name="play" item-left></ion-icon>
-      Rs. 2.00 per View
+   Rs.{{advert.price_per_view | number:'1.2-2'}} per View
   </button>
     <button ion-item>
     <ion-icon name="eye" item-left></ion-icon>
-      48 Views
+      {{advert.total_views}} Views
   </button>
     <button ion-item>
     <ion-icon name="card" item-left></ion-icon>
-      Rs. 2,480.00 / 14,000 Donated
+      Rs. {{(advert.price_per_view * advert.views | number:'1.2-2' )}} Donated
   </button>
     <button ion-item>
     <ion-icon name="clock" item-left></ion-icon>
-      Expires in 2016-02-02
+      Expires in  {{advert.expiration_date | date}}
   </button>
   </ion-list>
 </ion-content>

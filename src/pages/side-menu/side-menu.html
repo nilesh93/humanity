@@ -8,11 +8,11 @@
 
             <a ion-item>
                 <ion-avatar item-left>
-                    <img src="http://freelogozone.com/Data/Logo/preview-dcstaraelogoblack.png">
+                    <img [src]="user.picture">
                 </ion-avatar>
                 <h2>Hello</h2>
-                <h3>Nilesh Jayanandana</h3>
-                <button ion-button block round outline color="md-blue"> Rs. 2000.00</button>
+                <h3>{{user.name}}</h3>
+                <button ion-button block round outline color="md-blue"> Rs.{{user.points |  number:'1.2-2'}}</button>
             </a>
 
             <ion-list-header>

@@ -1,13 +1,9 @@
+import { UserService } from './../../services/user.service';
 import { Color } from 'ng2-charts';
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
-/**
- * Generated class for the HomePage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-home-page',
@@ -15,16 +11,38 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  user: any = {};
+  userDetails: any = {};
+  img: string = '';
+  dateJoined: string = '';
+  userDetailsDidLoad: Boolean = false;
+
+
+
+  labels: string[] = ['Earned', 'Donated'];
+  type: string = 'doughnut';
+  colorsEmpty: Array<Color> = [];
+
+  colorsEmptyObject: Array<Color> = [{}];
+
+  datasets: any[] = [];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage,
+    private userService: UserService, private zone: NgZone) {
+
+
+    storage.get('user').then((val) => {
+      this.user = val;
+    });
+    this.load();
+
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
   }
-  // Doughnut
-  public doughnutChartLabels: string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
-  public doughnutChartData: number[] = [350, 450, 100];
-  public doughnutChartType: string = 'doughnut';
+
 
   // events
   public chartClicked(e: any): void {
@@ -35,28 +53,34 @@ export class HomePage {
     console.log(e);
   }
 
+  load(ref = null) {
+    // this.userDetailsDidLoad = false;
+    this.userService.getUser()
+      .subscribe((data) => {
+        this.zone.run(() => {
+          this.userDetails = data.user;
+          this.img = data.user.img;
+          this.dateJoined = data.date_join_string;
 
-  labels: string[] = ['Earned', 'Donated'];
-  data: number[] = [350, 450];
-  type: string = 'doughnut';
-
-
-  colorsEmpty: Array<Color> = [];
-
-  colorsEmptyObject: Array<Color> = [{}];
-
-  datasets: any[] = [
-    {
-      data: this.data,
-      backgroundColor: [
-        "#BDBDBD",
-        "#2196F3",
-
-      ],
-      hoverBackgroundColor: [
-        "#BDBDBD",
-        "#2196F3"
-      ]
-    }];
+          this.datasets = [
+            {
+              data: [(this.userDetails.total_points + 1), (this.userDetails.total_donations + 1)],
+              backgroundColor: [
+                "#BDBDBD",
+                "#2196F3",
+              ],
+              hoverBackgroundColor: [
+                "#BDBDBD",
+                "#2196F3"
+              ]
+            }
+          ]
+          this.userDetailsDidLoad = true;
+          if(ref){
+            ref.complete();
+          }
+        });
+      });
+  }
 
 }

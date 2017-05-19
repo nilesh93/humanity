@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { UserService } from './../../services/user.service';
+import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
@@ -14,11 +15,26 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class LeaderboardPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  leaderboard: Array<any> = [];
+  constructor(public navCtrl: NavController, public navParams: NavParams, private userService: UserService,
+    private zone: NgZone) {
+      this.load();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LeaderboardPage');
   }
 
+  load(ref=null) {
+    this.userService.leaderboards()
+      .subscribe((data) => {
+        this.zone.run(() => {
+          this.leaderboard = data;
+
+          if(ref){
+            ref.complete(); 
+          }
+        });
+      });
+  }
 }

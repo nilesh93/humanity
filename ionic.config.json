@@ -1,6 +1,12 @@
 {
   "name": "humanity",
   "app_id": "60be3527",
+  "proxies": [
+    {
+      "path": "*/",
+      "proxyUrl": "http://localhost:3000/"
+    }
+  ],
   "v2": true,
-  "typescript": true
+  "typescript": true 
 }

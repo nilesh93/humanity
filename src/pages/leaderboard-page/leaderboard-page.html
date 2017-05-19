@@ -22,22 +22,18 @@
 
 
 
-<ion-content    style="background-color:#F5F5F5">
+<ion-content style="background-color:#F5F5F5">
+  <ion-refresher (ionRefresh)="load($event)" color="md-blue">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-list>
-    <ion-item>
+    <ion-item *ngFor="let user of leaderboard">
       <ion-avatar item-left>
-        <img src="https://yt3.ggpht.com/-symXisDFzQU/AAAAAAAAAAI/AAAAAAAAAAA/IVEEJH7gmUI/s900-c-k-no-mo-rj-c0xffffff/photo.jpg">
+        <img [src]="user.img">
       </ion-avatar>
-      <h2>Nilesh Jayanandana</h2>
-      <button ion-button round outline color="md-blue">Rs. 200,000.00</button>
+      <h2>{{user.name}}</h2>
+      <button ion-button round outline color="md-blue">Rs. {{user.total_donations | number:'1.2-2'}}</button>
     </ion-item>
 
-    <ion-item>
-      <ion-avatar item-left>
-        <img src="https://pbs.twimg.com/profile_images/766671921400324096/eDF9nvw6.jpg">
-      </ion-avatar>
-      <h2>Dimuthu De Silva</h2>
-      <button ion-button round outline color="md-blue">Rs. 100,000.00</button>
-    </ion-item>
   </ion-list>
 </ion-content>

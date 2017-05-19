@@ -1,5 +1,6 @@
+import { AdvertisementService } from './../../services/advertisement.service';
 import { ViewAddModal } from './../view-add-modal/view-add-modal';
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
 /**
@@ -15,7 +16,10 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 })
 export class AddsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
+  adds: Array<any> = [];
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,
+    private advertisementService: AdvertisementService, private zone: NgZone) {
+    this.getAdds();
   }
 
   ionViewDidLoad() {
@@ -23,23 +27,29 @@ export class AddsPage {
   }
 
   doRefresh(refresher) {
-    console.log('Begin async operation', refresher);
-
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      refresher.complete();
-    }, 2000);
-  }
-
-  buttonClick() {
-    console.log("clickerd");
+    this.getAdds(refresher);
   }
 
   
-  public viewAdd(bool) {
 
-    let profileModal = this.modalCtrl.create(ViewAddModal, { userId: 8675309, bool: bool });
 
+  public viewAdd(id) {
+
+    let profileModal = this.modalCtrl.create(ViewAddModal, { userId: 8675309, bool: true, addId: id });
     profileModal.present();
   }
+
+
+  getAdds(ref = null) {
+    this.advertisementService.getAdvertisements()
+      .subscribe((data) => {
+        this.zone.run(() => {
+          this.adds = data.data;
+          if (ref)
+            ref.complete();
+        });
+      });
+  }
+
+ 
 }
