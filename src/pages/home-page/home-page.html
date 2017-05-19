@@ -41,7 +41,10 @@
     </ion-list>
   </ion-card>
   <ion-card>
-    <ion-card-content>
+    <ion-card-header>
+      Statistics
+    </ion-card-header>
+    <ion-card-content style="border-top:2px solid #F5F5F5">
 
       <ion-row *ngIf="userDetailsDidLoad">
         <div col-5>
@@ -74,23 +77,32 @@
         </div>
       </ion-row>
     </ion-card-content>
+      <ion-list padding style="padding-top:0px">
+      <ion-item  style="border-top:2px solid #F5F5F5" >
+ 
+    <ion-icon name="ribbon"  item-left></ion-icon>
+    Humanity Rank 
+      <ion-badge item-right>{{rank}}</ion-badge>
+       </ion-item>
+      </ion-list>
   </ion-card>
 
+ 
   <ion-card>
     <ion-card-header>
       Accomplishments
     </ion-card-header>
-    <ion-list padding>
+    <ion-list padding style="padding-top:0px">
       <ion-item style="border-top:2px solid #F5F5F5">
 
-        <ion-icon name="ribbon" item-left></ion-icon>
+        <ion-icon name="trophy" item-left></ion-icon>
 
         <h2>Mahatma Ghandi</h2>
         <p> Donated Rs. 50,000</p>
       </ion-item>
       <ion-item style="border-top:2px solid #F5F5F5">
 
-        <ion-icon name="ribbon" item-left></ion-icon>
+        <ion-icon name="trophy" item-left></ion-icon>
 
         <h2>BussinessMan</h2>
         <p> Earned Rs. 50,000</p>

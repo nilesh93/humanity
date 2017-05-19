@@ -1,5 +1,4 @@
-
-<ion-header>
+<ion-header color="md-blue">
 
 
     <ion-navbar color="md-blue">
@@ -7,78 +6,62 @@
       <ion-icon name="menu"></ion-icon>
     </button>
         <ion-title>Causes</ion-title>
+
+        
+        <ion-buttons end>
+
+             <button ion-button  clear icon-only (click)="presentPopover($event)">
+  <ion-icon name="more"></ion-icon>
+</button>
+
+        </ion-buttons>
+
+
+
     </ion-navbar>
+    <ion-toolbar color="md-blue" *ngIf="showSubHeader">
+        <ion-searchbar [(ngModel)]="searchText" [showCancelButton]="true" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)"
+            animated="true" color="md-blue">
+        </ion-searchbar>
+    </ion-toolbar>
+
 
 </ion-header>
 
 
-<ion-content style="background-color:#F5F5F5">
+<ion-content #contentRef style="background-color:#F5F5F5" class="card-background-page" (ionScroll)="scrollingDetect($event)">
 
 
 
-    <ion-card>
+    <ion-card *ngFor="let item of causes">
 
 
-        <img src="http://www.savelifeindia.org/site/slider/images/slide1.jpg" />
+        <img [src]="item.img" />
 
-        <ion-item>
-            <ion-avatar item-left>
-                <div class="numberCircle"><span>PB</span></div>
-            </ion-avatar>
-            <h2>Poor Broken Dog</h2>
-            <p>November 5, 2016</p>
-            <p>Blood Donation Camp: Become a part of a large blood donor network. </p>
-            <button ion-button round outline color="md-blue">Rs 2,000,000.00 needed</button>
+        <ion-item class="card-title">
+
+            <h1>{{item.title}}</h1>
+            <p>{{item.date_created | date}}</p>
+            <p>{{item.description}}</p>
+            <button ion-button round color="md-blue">Rs {{(item.target - item.recieved) | number:'1.2-2'}} needed</button>
+            <button ion-button round [outline]="true" icon-left color="md-light">
+                 <ion-icon name="heart"></ion-icon>
+                    <div>{{item.watching}} Watching</div>
+            </button>
+
         </ion-item>
 
         <ion-row>
-            <ion-col col-8>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="heart"></ion-icon>
-                    <div>12 Watching</div>
-                    </button>
-            </ion-col>
-            <ion-col col-4>
-               <button round ion-button block outline color="md-dark" small>
+
+            
+                <button ion-button block  clear color="md-dark"  (click)="gotocause_details(item._id)" >
        
-        More...
+        More Details
+        
       </button>
-            </ion-col>
+            
         </ion-row>
     </ion-card>
-
-    <ion-card>
-
-
-        <img src="http://www.savelifeindia.org/site/slider/images/slide1.jpg" height="100" width="100" />
-
-        <ion-item>
-            <ion-avatar item-left>
-                <div class="numberCircle"><span>PB</span></div>
-            </ion-avatar>
-            <h2>Poor Broken Dog</h2>
-            <p>November 5, 2016</p>
-            <p>Blood Donation Camp: Become a part of a large blood donor network. </p>
-            <button ion-button round outline color="md-blue">Rs 2,000,000.00 needed</button>
-        </ion-item>
-
-        <ion-row>
-            <ion-col col-8>
-                <button ion-button icon-left  small>
-                    <ion-icon name="heart"></ion-icon>
-                    <div>12 Watching</div>
-                    </button>
-            </ion-col>
-            <ion-col col-4>
-                <button round ion-button block outline color="md-dark" small>
-       
-        More...
-      </button>
-            </ion-col>
-        </ion-row>
-    </ion-card>
-
-
 
 
 </ion-content>

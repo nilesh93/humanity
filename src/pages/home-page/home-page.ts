@@ -22,7 +22,7 @@ export class HomePage {
   labels: string[] = ['Earned', 'Donated'];
   type: string = 'doughnut';
   colorsEmpty: Array<Color> = [];
-
+  rank: number = 0;
   colorsEmptyObject: Array<Color> = [{}];
 
   datasets: any[] = [];
@@ -56,7 +56,7 @@ export class HomePage {
   load(ref = null) {
     // this.userDetailsDidLoad = false;
     this.userService.getUser()
-      .subscribe((data) => {
+      .subscribe((data: any) => {
         this.zone.run(() => {
           this.userDetails = data.user;
           this.img = data.user.img;
@@ -74,13 +74,25 @@ export class HomePage {
                 "#2196F3"
               ]
             }
-          ]
+          ];
+          this.userService.amount = data.user.points;
           this.userDetailsDidLoad = true;
-          if(ref){
+          if (ref) {
             ref.complete();
           }
         });
       });
+
+
+    this.userService.getRank(this.userService.id)
+      .subscribe((data: any) => {
+        this.zone.run(() => {
+          this.rank = data.rank;
+          console.log(this.rank);
+        });
+      })
+
+
   }
 
 }

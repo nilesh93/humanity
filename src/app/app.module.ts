@@ -21,6 +21,7 @@ import { DonatePageModule } from '../pages/donate-page/donate-page.module';
 import { DonationsPageModule } from "../pages/donations-page/donations-page.module";
 import { IonicStorageModule } from '@ionic/storage';
 import { HttpModule } from '@angular/http';
+import { CauseService } from "../services/causes.service";
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -47,7 +48,7 @@ const cloudSettings: CloudSettings = {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp, {
-     
+
     }),
     CloudModule.forRoot(cloudSettings),
     IonicStorageModule.forRoot(),
@@ -74,7 +75,8 @@ const cloudSettings: CloudSettings = {
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     UserService,
-    AdvertisementService
+    AdvertisementService,
+    CauseService
   ]
 })
 export class AppModule { }

@@ -18,6 +18,63 @@
 </ion-header>
 
 
-<ion-content padding>
-    <button ion-button color="dark" (click)="dismiss()">Close</button>
+<ion-content>
+    <div *ngIf="details">
+
+        <img [src]="img" alt="">
+        <ion-list style="margin-bottom:0px">
+
+            <ion-item>
+
+                <h2>{{details.title}}</h2>
+                <p>{{details.date_created | date}}</p>
+
+            </ion-item>
+
+            <p padding style="margin:0px">
+                <span style="font-size:110%;margin-bottom:8%;color:black"> Description</span> <br> {{details.description}}
+            </p>
+        </ion-list>
+
+
+        <ion-row>
+
+            <ion-col>
+                <button ion-button block color="md-blue">Rs {{(details.target - details.recieved) | number:'1.2-2'}} needed</button>
+            </ion-col>
+            <ion-col>
+
+                <button ion-button block [outline]="true" icon-left color="md-light">
+                 <ion-icon name="heart"></ion-icon>
+                    <div>{{details.watching}} Watching</div>
+                </button>
+            </ion-col>
+
+        </ion-row>
+        <ion-list>
+            <ion-list-header style="margin-bottom:0cm">
+                Cause Details
+            </ion-list-header>
+
+            <button ion-item>
+    <ion-icon name="card" item-left></ion-icon>
+   Rs.{{details.target | number:'1.2-2'}} Target
+  </button>
+            <button ion-item>
+    <ion-icon name="pricetag" item-left></ion-icon>
+   Rs.{{details.recieved | number:'1.2-2'}} Recieved
+  </button>
+            <button ion-item>
+    <ion-icon name="call" item-left></ion-icon>
+       {{details.contact}}
+  </button>
+
+        </ion-list>
+
+    </div>
 </ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <button ion-button block  (click)="showPrompt()">Donate Now </button>
+    </ion-toolbar>
+</ion-footer>

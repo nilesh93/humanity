@@ -27,12 +27,14 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-list>
-    <ion-item *ngFor="let user of leaderboard">
+    <ion-item *ngFor="let user of leaderboard; let i = index">
       <ion-avatar item-left>
         <img [src]="user.img">
       </ion-avatar>
       <h2>{{user.name}}</h2>
       <button ion-button round outline color="md-blue">Rs. {{user.total_donations | number:'1.2-2'}}</button>
+
+       <ion-badge item-right>{{i+1}}</ion-badge>
     </ion-item>
 
   </ion-list>
