@@ -90,7 +90,7 @@ export class HomePage {
           this.rank = data.rank;
           console.log(this.rank);
         });
-      })
+      });
 
 
   }

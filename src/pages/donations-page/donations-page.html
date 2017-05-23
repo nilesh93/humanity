@@ -16,19 +16,24 @@
 </ion-header>
 
 
-<ion-content  style="background-color:#F5F5F5">
+<ion-content style="background-color:#F5F5F5">
   <ion-list>
 
-    <ion-item>
+    <ion-item *ngFor="let x of donations">
       <ion-avatar item-left>
-        <div class="numberCircle"><span>PB</span></div>
+        <div class="numberCircle"><span>{{extractLetterss(x._cause.title) | uppercase}}</span></div>
       </ion-avatar>
-      <h2>Poor Broken Dog</h2>
-      <p>November 5, 2016</p>
-      <p>Blood Donation Camp: Become a part of a large blood donor network. </p>
-      <button ion-button round outline color="md-blue">Rs 2,000,000.00</button>
+      <h2>{{x._cause.title}}</h2>
+      <p>{{x.date | date}}</p>
+      <p>{{x._cause.description}} </p>
+      <button ion-button round outline color="md-blue">Rs {{x.amount | number:'1.2-2'}}</button>
     </ion-item>
 
   </ion-list>
+
+  <ion-infinite-scroll *ngIf="showInfiniteScroll" (ionInfinite)="lazyLoad($event)">
+    <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more Donations...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>

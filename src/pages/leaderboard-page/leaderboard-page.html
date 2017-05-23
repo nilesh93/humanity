@@ -18,7 +18,7 @@
 
   </ion-navbar>
 
-</ion-header>
+</ion-header>   
 
 
 
@@ -28,14 +28,20 @@
   </ion-refresher>
   <ion-list>
     <ion-item *ngFor="let user of leaderboard; let i = index">
+      <ion-badge item-left style="background-color:transparent; color:grey; font-size:108%">{{i+1}}</ion-badge>
       <ion-avatar item-left>
         <img [src]="user.img">
       </ion-avatar>
       <h2>{{user.name}}</h2>
       <button ion-button round outline color="md-blue">Rs. {{user.total_donations | number:'1.2-2'}}</button>
 
-       <ion-badge item-right>{{i+1}}</ion-badge>
+
     </ion-item>
 
   </ion-list>
+
+  <ion-infinite-scroll *ngIf="showInfiniteScroll" (ionInfinite)="lazyLoad($event)">
+    <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more Users...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

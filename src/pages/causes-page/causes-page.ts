@@ -23,7 +23,15 @@ export class CausesPage {
   causes: Array<any> = [];
   popover: any;
   filter: string = "All";
+  page: number = 1;
+  totalPages: any;
+  busy: Boolean = false;
+  showInfiniteScroll: Boolean = true;
 
+
+  defaultImage = 'https://www.placecage.com/1000/1000';
+  image = 'https://images.unsplash.com/photo-1443890923422-7819ed4101c0?fm=jpg';
+  offset = 100;
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,
     private zone: NgZone, private causeService: CauseService, public popoverCtrl: PopoverController) {
     this.getCauses();
@@ -71,14 +79,52 @@ export class CausesPage {
   }
 
 
-  getCauses() {
-    this.causeService.getCauses()
+  getCauses(update = false, infiniteScroll = null) {
+
+
+    this.busy = true;
+
+    this.causeService.getCauses(this.page)
       .subscribe((data) => {
         this.zone.run(() => {
-          this.causes = data.data;
+          if (update) {
+            data.data.docs.map((obj) => {
+              this.causes.push(obj);
+            });
+            infiniteScroll.complete();
+          } else {
+            this.causes = data.data.docs;
+            this.totalPages = data.data.pages;
+          }
+
+          if (this.page === this.totalPages) {
+            this.showInfiniteScroll = false;
+          }
+          this.busy = false;
         });
       });
   }
+
+  lazyLoad(infiniteScroll) {
+    if (this.busy) {
+      infiniteScroll.complete();
+      return false;
+    }
+    this.page++;
+    if (this.page > this.totalPages) {
+      infiniteScroll.complete();
+      this.page--;
+      return false;
+    }
+
+    // check direction
+    if (infiniteScroll._content.directionY == 'down') {
+      this.getCauses(true, infiniteScroll);
+    } else {
+      infiniteScroll.complete();
+    }
+  }
+
 
   presentPopover(myEvent) {
     this.popover = this.popoverCtrl.create(PopoverPage, { filter: this.filter });

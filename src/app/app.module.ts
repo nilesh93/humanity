@@ -22,6 +22,9 @@ import { DonationsPageModule } from "../pages/donations-page/donations-page.modu
 import { IonicStorageModule } from '@ionic/storage';
 import { HttpModule } from '@angular/http';
 import { CauseService } from "../services/causes.service";
+import { DonationService } from '../services/donation.service';
+import { IonicImageLoader } from 'ionic-image-loader';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -63,7 +66,9 @@ const cloudSettings: CloudSettings = {
     DonatePageModule,
     WatchingCauseModule,
     DonationsPageModule,
-    HomePageModule
+    HomePageModule,
+    IonicImageLoader.forRoot(),
+    LazyLoadImageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -76,7 +81,8 @@ const cloudSettings: CloudSettings = {
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     UserService,
     AdvertisementService,
-    CauseService
+    CauseService,
+    DonationService
   ]
 })
 export class AppModule { }

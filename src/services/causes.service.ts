@@ -14,8 +14,8 @@ export class CauseService {
     public options = new RequestOptions({ headers: this.headers });
     constructor(private http: Http) { }
 
-    getCauses() {
-        return this.http.get(`${URL_CONST.HOST}/causes`, this.options)
+    getCauses(page) {
+        return this.http.get(`${URL_CONST.HOST}/causes?page=${page}`, this.options)
             .map((response) => response.json()).catch((res: Response) => {
                 console.log("****** CATCH");
                 console.log(JSON.stringify(res.json()));

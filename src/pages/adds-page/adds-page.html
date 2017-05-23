@@ -12,7 +12,7 @@
     </button>
 
     <ion-title>
-   Advertisements
+      Advertisements
     </ion-title>
 
 
@@ -29,7 +29,7 @@
 
   <ion-list>
 
-    
+
     <a ion-item *ngFor="let add of adds">
       <ion-avatar item-left>
         <img [src]="add._company.img">
@@ -40,6 +40,12 @@
       <button ion-button outline color="md-dark" item-right (click)="viewAdd(add._id)" style="padding-left:1rem;padding-right:1rem;">Watch</button>
 
     </a>
-    
+
   </ion-list>
+
+
+  <ion-infinite-scroll *ngIf="showInfiniteScroll" (ionInfinite)="lazyLoad($event)">
+    <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more Advertisements...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

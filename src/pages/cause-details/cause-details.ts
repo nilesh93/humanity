@@ -76,21 +76,21 @@ export class CauseDetails {
                   amount: data.amount,
                   user_id: this.userService.id
                 }).subscribe((payload) => {
-                  this.showToast(`Successfully Donated Rs ${data.amount}`);
+                  this.showToast(`Successfully Donated Rs ${data.amount}`, false);
                   this.userService.amount = payload.user.points;
                   this.details = payload.cause;
                 }, (err) => {
-                  this.showToast('Something went wrong');
+                  this.showToast('Something went wrong', true);
                 });
 
               } else {
                 msg = `Sorry! Your donations exceeds your app points`;
-                this.showToast(msg);
+                this.showToast(msg, true);
               }
             }
             else {
               msg = `Inavlid Input! Please try again`;
-              this.showToast(msg);
+              this.showToast(msg, true);
             }
 
 
@@ -101,11 +101,13 @@ export class CauseDetails {
     prompt.present();
   }
 
-  showToast(msg) {
+  showToast(msg, close) {
     let toast = this.toastCtrl.create({
       message: msg,
       duration: 3000,
-      position: 'bottom'
+      position: 'bottom',
+      showCloseButton: close
+
     });
     toast.present();
   }

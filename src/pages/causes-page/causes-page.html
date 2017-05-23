@@ -7,10 +7,10 @@
     </button>
         <ion-title>Causes</ion-title>
 
-        
+
         <ion-buttons end>
 
-             <button ion-button  clear icon-only (click)="presentPopover($event)">
+            <button ion-button clear icon-only (click)="presentPopover($event)">
   <ion-icon name="more"></ion-icon>
 </button>
 
@@ -37,7 +37,7 @@
 
 
         <img [src]="item.img" />
-
+        <!--<img defaultImage="assets/img/lazy.jpg" [lazyLoad]="item.img" [offset]="offset">-->
         <ion-item class="card-title">
 
             <h1>{{item.title}}</h1>
@@ -53,15 +53,20 @@
 
         <ion-row>
 
-            
-                <button ion-button block  clear color="md-dark"  (click)="gotocause_details(item._id)" >
+
+            <button ion-button block clear color="md-dark" (click)="gotocause_details(item._id)">
        
         More Details
         
       </button>
-            
+
         </ion-row>
     </ion-card>
+
+    <ion-infinite-scroll *ngIf="showInfiniteScroll" (ionInfinite)="lazyLoad($event)">
+        <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more Causes...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 
 
 </ion-content>

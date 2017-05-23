@@ -15,8 +15,9 @@ export class AdvertisementService {
     constructor(private http: Http) { }
 
 
-    getAdvertisements() {
-        return this.http.get(`${URL_CONST.HOST}/advertisements`, this.options)
+    getAdvertisements(page) {
+        console.log(page);
+        return this.http.get(`${URL_CONST.HOST}/advertisements?page=${page}`, this.options)
             .map((response) => response.json()).catch((res: Response) => {
                 console.log("****** CATCH");
                 console.log(JSON.stringify(res.json()));

@@ -16,25 +16,63 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class LeaderboardPage {
 
   leaderboard: Array<any> = [];
+  page: number = 1;
+  busy: Boolean = false;
+  totalPages: number;
+  showInfiniteScroll: Boolean = true;
   constructor(public navCtrl: NavController, public navParams: NavParams, private userService: UserService,
     private zone: NgZone) {
-      this.load();
+    this.load();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LeaderboardPage');
   }
 
-  load(ref=null) {
+  load(ref = null, update = false, infiniteScroll = null) {
     this.userService.leaderboards()
-      .subscribe((data) => {
+      .subscribe((data: any) => {
         this.zone.run(() => {
-          this.leaderboard = data;
+          this.leaderboard = data.docs;
 
-          if(ref){
-            ref.complete(); 
+          if (update) {
+            data.docs.map((obj) => {
+              this.leaderboard.push(obj);
+            });
+            infiniteScroll.complete();
+          } else {
+            this.leaderboard = data.docs;
+            this.totalPages = data.pages;
+          }
+          if (this.page === this.totalPages) {
+            this.showInfiniteScroll = false;
+          }
+
+          if (ref) {
+            ref.complete();
           }
         });
       });
+  }
+
+
+  lazyLoad(infiniteScroll) {
+    if (this.busy) {
+      infiniteScroll.complete();
+      return false;
+    }
+    this.page++;
+    if (this.page > this.totalPages) {
+      infiniteScroll.complete();
+      this.page--;
+      return false;
+    }
+
+    // check direction
+    if (infiniteScroll._content.directionY == 'down') {
+      this.load(null, true, infiniteScroll);
+    } else {
+      infiniteScroll.complete();
+    }
   }
 }
