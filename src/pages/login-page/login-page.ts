@@ -2,7 +2,7 @@ import { UserService } from './../../services/user.service';
 import { SideMenu } from './../side-menu/side-menu';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { GoogleAuth, User, FacebookAuth } from '@ionic/cloud-angular';
+import { GoogleAuth, User, FacebookAuth, Auth } from '@ionic/cloud-angular';
 import { Storage } from '@ionic/storage';
 
 
@@ -24,12 +24,16 @@ export class NativeUser {
 
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    public googleAuth: GoogleAuth, public user: User, public facebookAuth: FacebookAuth,
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public googleAuth: GoogleAuth,
+    public user: User,
+    public facebookAuth: FacebookAuth,
     private storage: Storage,
     private alertCtrl: AlertController,
-    private userService: UserService) {
-
+    private userService: UserService,
+    private auth: Auth) {
+    this.auth.logout();
   }
 
   ionViewDidLoad() {
@@ -83,10 +87,10 @@ export class LoginPage {
 
   google() {
     this.testlogin();
-    this.googleAuth.login().then((data) => {
-      console.log(data);
-      this.doLogin();
-    }, this.errHandler.bind(this));
+    // this.googleAuth.login().then((data) => {
+    //   console.log(data);
+    //   this.doLogin();
+    // }, this.errHandler.bind(this));
   }
 
   errHandler(data) {

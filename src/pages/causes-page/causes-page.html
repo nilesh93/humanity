@@ -20,7 +20,7 @@
 
     </ion-navbar>
     <ion-toolbar color="md-blue" *ngIf="showSubHeader">
-        <ion-searchbar [(ngModel)]="searchText" [showCancelButton]="true" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)"
+        <ion-searchbar [(ngModel)]="searchText" [showCancelButton]="true" (search)="onInput($event)"  (ionCancel)="onCancel($event)"
             animated="true" color="md-blue">
         </ion-searchbar>
     </ion-toolbar>
@@ -44,9 +44,9 @@
             <p>{{item.date_created | date}}</p>
             <p>{{item.description}}</p>
             <button ion-button round color="md-blue">Rs {{(item.target - item.recieved) | number:'1.2-2'}} needed</button>
-            <button ion-button round [outline]="true" icon-left color="md-light">
+            <button ion-button round [outline]="item.watched_by.length == 0" icon-left color="md-light">
                  <ion-icon name="heart"></ion-icon>
-                    <div>{{item.watching}} Watching</div>
+                    <div>{{item.watched_by.length}} Watching</div>
             </button>
 
         </ion-item>

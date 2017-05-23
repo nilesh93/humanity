@@ -3,12 +3,6 @@ import { ViewAddModal } from './../view-add-modal/view-add-modal';
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
-/**
- * Generated class for the AddsPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-adds-page',
@@ -21,16 +15,22 @@ export class AddsPage {
   busy: Boolean = false;
   totalPages: number;
   showInfiniteScroll: Boolean = true;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,
-    private advertisementService: AdvertisementService, private zone: NgZone) {
+
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public modalCtrl: ModalController,
+    private advertisementService: AdvertisementService,
+    private zone: NgZone) {
+
     this.getAdds();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AddsPage');
+
   }
 
   doRefresh(refresher) {
+    this.page = 1;
     this.getAdds(refresher);
   }
 
@@ -65,7 +65,7 @@ export class AddsPage {
   getAdds(ref = null, update = false, infiniteScroll = null) {
     this.busy = true;
     this.advertisementService.getAdvertisements(this.page)
-      .subscribe((data) => {
+      .subscribe((data: any) => {
         this.zone.run(() => {
           if (update) {
             data.data.docs.map((obj) => {
@@ -74,12 +74,16 @@ export class AddsPage {
             infiniteScroll.complete();
           } else {
             this.adds = data.data.docs;
-            this.totalPages = data.data.pages;
+
           }
+          this.totalPages = data.data.pages;
           if (this.page === this.totalPages) {
             this.showInfiniteScroll = false;
+          } else {
+            this.showInfiniteScroll = true;
           }
           if (ref)
+
             ref.complete();
         });
         this.busy = false;

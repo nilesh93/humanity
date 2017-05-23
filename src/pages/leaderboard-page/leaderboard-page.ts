@@ -2,12 +2,7 @@ import { UserService } from './../../services/user.service';
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the LeaderboardPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+
 @IonicPage()
 @Component({
   selector: 'page-leaderboard-page',
@@ -26,19 +21,17 @@ export class LeaderboardPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LeaderboardPage');
   }
 
   load(ref = null, update = false, infiniteScroll = null) {
-    this.userService.leaderboards()
+    this.userService.leaderboards(this.page)
       .subscribe((data: any) => {
         this.zone.run(() => {
-          this.leaderboard = data.docs;
-
           if (update) {
             data.docs.map((obj) => {
               this.leaderboard.push(obj);
             });
+
             infiniteScroll.complete();
           } else {
             this.leaderboard = data.docs;
@@ -46,6 +39,8 @@ export class LeaderboardPage {
           }
           if (this.page === this.totalPages) {
             this.showInfiniteScroll = false;
+          } else {
+            this.showInfiniteScroll = true;
           }
 
           if (ref) {
@@ -55,6 +50,10 @@ export class LeaderboardPage {
       });
   }
 
+  reload(refresher) {
+    this.page = 1;
+    this.load(refresher);
+  }
 
   lazyLoad(infiniteScroll) {
     if (this.busy) {

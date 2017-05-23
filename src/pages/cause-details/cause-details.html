@@ -40,13 +40,13 @@
         <ion-row>
 
             <ion-col>
-                <button ion-button block color="md-blue">Rs {{(details.target - details.recieved) | number:'1.2-2'}} needed</button>
+                <button (click)="showPrompt()" ion-button block color="md-blue">Rs {{(details.target - details.recieved) | number:'1.2-2'}} needed</button>
             </ion-col>
             <ion-col>
 
-                <button ion-button block [outline]="true" icon-left color="md-light">
+                <button ion-button block [outline]="!watching" (click)="watch()" icon-left color="md-light">
                  <ion-icon name="heart"></ion-icon>
-                    <div>{{details.watching}} Watching</div>
+                    <div>{{details.watched_by.length}} Watching</div>
                 </button>
             </ion-col>
 
@@ -75,6 +75,6 @@
 </ion-content>
 <ion-footer>
     <ion-toolbar>
-        <button ion-button block  (click)="showPrompt()">Donate Now </button>
+        <button ion-button block (click)="showPrompt()">Donate Now </button>
     </ion-toolbar>
 </ion-footer>

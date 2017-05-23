@@ -1,9 +1,10 @@
+import { UserState } from './../../reducers/user.reducer';
+import { UserService } from './../../services/user.service';
 import { HomePage } from './../home-page/home-page';
 import { DonationsPage } from './../donations-page/donations-page';
 import { LeaderboardPage } from './../leaderboard-page/leaderboard-page';
-// import { Tabs } from './../tabs/tabs';
 import { AddsPage } from './../adds-page/adds-page';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, NgZone } from '@angular/core';
 import { NavController, Nav } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { CausesPage } from "../causes-page/causes-page";
@@ -19,11 +20,12 @@ export class SideMenu {
   notification: boolean = false;
   user: any = {};
 
-  constructor(public navCtrl: NavController, private storage: Storage) {
+  constructor(public navCtrl: NavController,
+    private storage: Storage,
+    private userService: UserService,
+    private zone: NgZone) {
     this.sideBarPage = HomePage;
-    storage.get('user').then((val) => {
-      this.user = val;
-    });
+    this.subscribe();
   }
 
   navigate(value) {
@@ -44,6 +46,18 @@ export class SideMenu {
         this.sideBarPage = DonationsPage;
         break;
     }
+  }
+
+  /**
+  * Function to subscribe the user info from the user service.
+  */
+  subscribe() {
+    this.userService.userInfo
+      .subscribe((data: UserState) => {
+        this.zone.run(() => {
+          this.user = data;
+        });
+      });
   }
 
 }

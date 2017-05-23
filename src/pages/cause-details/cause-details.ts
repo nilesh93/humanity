@@ -1,14 +1,9 @@
+import {  SUB_POINTS } from './../../reducers/user.reducer';
 import { UserService } from './../../services/user.service';
 import { CauseService } from './../../services/causes.service';
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, AlertController, ToastController } from 'ionic-angular';
 
-/**
- * Generated class for the CauseDetails page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-cause-details',
@@ -19,28 +14,34 @@ export class CauseDetails {
   causeId: any;
   details: any;
   img: any = '';
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
-    private causeService: CauseService, private zone: NgZone, public alertCtrl: AlertController,
-    private toastCtrl: ToastController, private userService: UserService) {
+  watching: Boolean = false;
+
+
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public viewCtrl: ViewController,
+    private causeService: CauseService,
+    private zone: NgZone,
+    public alertCtrl: AlertController,
+    private toastCtrl: ToastController,
+    private userService: UserService) {
+
     this.causeId = this.navParams.get('causeId');
 
     this.causeService.viewCauses(this.causeId)
-      .subscribe((data) => {
+      .subscribe((data: any) => {
         this.zone.run(() => {
           this.img = data.img;
           this.details = data;
-          console.log(this.details);
+          this.watching = (data.watched_by.indexOf(this.userService.id) !== -1);
         });
-
       });
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CauseDetails');
-    console.log(this.userService.amount);
+
   }
   dismiss() {
-    //
     this.viewCtrl.dismiss();
   }
 
@@ -66,7 +67,6 @@ export class CauseDetails {
         {
           text: 'Confirm',
           handler: data => {
-            console.log('Saved clicked', data);
             let msg = '';
             if (data.amount == parseFloat(data.amount)) {
 
@@ -75,10 +75,12 @@ export class CauseDetails {
                 this.causeService.donate(this.causeId, {
                   amount: data.amount,
                   user_id: this.userService.id
-                }).subscribe((payload) => {
+                }).subscribe((payload: any) => {
+
                   this.showToast(`Successfully Donated Rs ${data.amount}`, false);
-                  this.userService.amount = payload.user.points;
+                  this.userService.dispatch(SUB_POINTS, data.amount);
                   this.details = payload.cause;
+
                 }, (err) => {
                   this.showToast('Something went wrong', true);
                 });
@@ -92,8 +94,6 @@ export class CauseDetails {
               msg = `Inavlid Input! Please try again`;
               this.showToast(msg, true);
             }
-
-
           }
         }
       ]
@@ -111,5 +111,19 @@ export class CauseDetails {
     });
     toast.present();
   }
+
+  watch() {
+
+    let obs = (this.watching) ? this.causeService.unwatch(this.causeId, this.userService.id) :
+      this.causeService.watch(this.causeId, this.userService.id);
+
+    obs.subscribe((data: any) => {
+      this.showToast((this.watching) ? 'Stopped watching this cause' : 'Started Watching this cause', false);
+      this.details = data.data;
+      this.watching = (data.data.watched_by.indexOf(this.userService.id) !== -1);
+
+    });
+  }
+
 
 }

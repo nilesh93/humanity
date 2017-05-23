@@ -3,12 +3,7 @@ import { DonationService } from './../../services/donation.service';
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the DonationsPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+
 @IonicPage()
 @Component({
   selector: 'page-donations-page',
@@ -37,10 +32,10 @@ export class DonationsPage {
     return arr[0].split('')[0] + arr[1].split('')[0];
   }
 
-  load(update = false, infiniteScroll = null) {
+  load(update = false, infiniteScroll = null, ref = null) {
     this.busy = true;
     this.donationService.getDonationHistory(this.userService.id, this.page)
-      .subscribe((data) => {
+      .subscribe((data: any) => {
 
         this.zone.run(() => {
           if (update) {
@@ -55,9 +50,19 @@ export class DonationsPage {
 
           if (this.page === this.totalPages) {
             this.showInfiniteScroll = false;
+          } else {
+            this.showInfiniteScroll = true;
           }
+
           this.busy = false;
+
+          if (ref) {
+            ref.complete();
+          }
         });
+      }, (err) => {
+        if (ref)
+          ref.complete();
       });
   }
 
@@ -82,4 +87,8 @@ export class DonationsPage {
     }
   }
 
+  refresh(refresher) {
+    this.page = 1;
+    this.load(false, null, refresher);
+  }
 }

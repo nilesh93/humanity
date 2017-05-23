@@ -1,3 +1,4 @@
+import { UPDATE_USER } from './../../reducers/user.reducer';
 import { UserService } from './../../services/user.service';
 import { Color } from 'ng2-charts';
 import { Component, NgZone } from '@angular/core';
@@ -16,31 +17,23 @@ export class HomePage {
   img: string = '';
   dateJoined: string = '';
   userDetailsDidLoad: Boolean = false;
-
-
-
   labels: string[] = ['Earned', 'Donated'];
   type: string = 'doughnut';
   colorsEmpty: Array<Color> = [];
   rank: number = 0;
   colorsEmptyObject: Array<Color> = [{}];
-
   datasets: any[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage,
-    private userService: UserService, private zone: NgZone) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    private storage: Storage,
+    private userService: UserService,
+    private zone: NgZone) {
 
-
-    storage.get('user').then((val) => {
-      this.user = val;
-    });
     this.load();
-
-
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HomePage');
   }
 
 
@@ -54,25 +47,22 @@ export class HomePage {
   }
 
   load(ref = null) {
-    // this.userDetailsDidLoad = false;
+    this.userDetailsDidLoad = false;
     this.userService.getUser()
       .subscribe((data: any) => {
         this.zone.run(() => {
+
+          this.userService.dispatch(UPDATE_USER, data.user);
+
+
           this.userDetails = data.user;
           this.img = data.user.img;
           this.dateJoined = data.date_join_string;
-
           this.datasets = [
             {
-              data: [(this.userDetails.total_points + 1), (this.userDetails.total_donations + 1)],
-              backgroundColor: [
-                "#BDBDBD",
-                "#2196F3",
-              ],
-              hoverBackgroundColor: [
-                "#BDBDBD",
-                "#2196F3"
-              ]
+              data: [(this.userDetails.total_donations + 1), (this.userDetails.total_points + 1)],
+              backgroundColor: ["#BDBDBD", "#2196F3"],
+              hoverBackgroundColor: ["#BDBDBD", "#2196F3"]
             }
           ];
           this.userService.amount = data.user.points;

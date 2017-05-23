@@ -17,6 +17,9 @@
 
 
 <ion-content style="background-color:#F5F5F5">
+  <ion-refresher (ionRefresh)="refresh($event)" color="md-blue">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-list>
 
     <ion-item *ngFor="let x of donations">

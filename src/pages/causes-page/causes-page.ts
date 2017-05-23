@@ -1,15 +1,11 @@
+import { UserService } from './../../services/user.service';
 import { Component, ViewChild, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, Content, PopoverController } from 'ionic-angular';
 import { CauseDetails } from '../cause-details/cause-details';
-import { DonatePage } from '../donate-page/donate-page';
+import { Keyboard } from '@ionic-native/keyboard';
 import { CauseService } from "../../services/causes.service";
 import { PopoverPage } from './popover.component';
-/**
- * Generated class for the CausesPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+
 @IonicPage()
 @Component({
   selector: 'page-causes-page',
@@ -29,11 +25,9 @@ export class CausesPage {
   showInfiniteScroll: Boolean = true;
 
 
-  defaultImage = 'https://www.placecage.com/1000/1000';
-  image = 'https://images.unsplash.com/photo-1443890923422-7819ed4101c0?fm=jpg';
-  offset = 100;
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,
-    private zone: NgZone, private causeService: CauseService, public popoverCtrl: PopoverController) {
+    private zone: NgZone, private causeService: CauseService, public popoverCtrl: PopoverController,
+    private userService: UserService, private keyboard: Keyboard) {
     this.getCauses();
   }
 
@@ -48,11 +42,7 @@ export class CausesPage {
     profileModal.present();
   }
 
-  gotodonate_page() {
-    let profileModal = this.modalCtrl.create(DonatePage, { donateId: 1234567 });
 
-    profileModal.present();
-  }
 
   scrollingDetect(event) {
     let initial = this.showSubHeader;
@@ -71,8 +61,9 @@ export class CausesPage {
 
   }
 
-  onInput() {
-
+  onInput(input) {
+    this.getCauses();
+    this.keyboard.close();
   }
   onCancel() {
 
@@ -83,9 +74,11 @@ export class CausesPage {
 
 
     this.busy = true;
+    let user_id = this.userService.id;
 
-    this.causeService.getCauses(this.page)
-      .subscribe((data) => {
+
+    this.causeService.getCauses(this.page, user_id, this.filter, this.searchText)
+      .subscribe((data: any) => {
         this.zone.run(() => {
           if (update) {
             data.data.docs.map((obj) => {
@@ -95,12 +88,17 @@ export class CausesPage {
           } else {
             this.causes = data.data.docs;
             this.totalPages = data.data.pages;
+            this.showSubHeader = true;
           }
 
           if (this.page === this.totalPages) {
             this.showInfiniteScroll = false;
+          } else {
+            this.showInfiniteScroll = true;
           }
+
           this.busy = false;
+
         });
       });
   }
@@ -133,7 +131,13 @@ export class CausesPage {
     });
 
     this.popover.onDidDismiss((data) => {
-      console.log('dissmissed', data);
+      if (data) {
+        if (this.filter !== data) {
+          this.filter = data;
+          this.page = 1;
+          this.getCauses();
+        }
+      }
     });
   }
 

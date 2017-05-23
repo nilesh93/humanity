@@ -1,3 +1,3 @@
 export const URL_CONST = {
-    HOST:'http://localhost:3000'  
+    HOST:'http://humanity-api.apps.reactive-solutions.xyz'  
 }
