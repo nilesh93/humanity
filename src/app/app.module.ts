@@ -1,3 +1,4 @@
+import { AboutModule } from './../pages/about/about.module';
 import { CLOUD_CONFIG } from './../config/auth';
 import { UserReducer } from './../reducers/user.reducer';
 import { Keyboard } from '@ionic-native/keyboard';
@@ -57,7 +58,8 @@ import { StoreModule } from '@ngrx/store';
     HomePageModule,
     IonicImageLoader.forRoot(),
     LazyLoadImageModule,
-    StoreModule.provideStore({ user: UserReducer })
+    StoreModule.provideStore({ user: UserReducer }),
+    AboutModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
