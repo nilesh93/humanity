@@ -1,6 +1,6 @@
 import { UserService } from './../../services/user.service';
 import { Component, ViewChild, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, Content, PopoverController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Content, PopoverController, ToastController } from 'ionic-angular';
 import { CauseDetails } from '../cause-details/cause-details';
 import { Keyboard } from '@ionic-native/keyboard';
 import { CauseService } from "../../services/causes.service";
@@ -23,11 +23,18 @@ export class CausesPage {
   totalPages: any;
   busy: Boolean = false;
   showInfiniteScroll: Boolean = true;
+  empty: Boolean = false;
 
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,
-    private zone: NgZone, private causeService: CauseService, public popoverCtrl: PopoverController,
-    private userService: UserService, private keyboard: Keyboard) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public modalCtrl: ModalController,
+    private zone: NgZone,
+    private causeService: CauseService,
+    public popoverCtrl: PopoverController,
+    private userService: UserService,
+    private keyboard: Keyboard,
+    private toastCtrl: ToastController, ) {
     this.getCauses();
   }
 
@@ -45,6 +52,7 @@ export class CausesPage {
 
 
   scrollingDetect(event) {
+
     let initial = this.showSubHeader;
     if (event.directionY == "down") {
       this.showSubHeader = false;
@@ -70,7 +78,7 @@ export class CausesPage {
   }
 
 
-  getCauses(update = false, infiniteScroll = null) {
+  getCauses(update = false, infiniteScroll = null, ref = null) {
 
 
     this.busy = true;
@@ -89,6 +97,17 @@ export class CausesPage {
             this.causes = data.data.docs;
             this.totalPages = data.data.pages;
             this.showSubHeader = true;
+            if (this.causes.length === 0) {
+              this.empty = true;
+              let toast = this.toastCtrl.create({
+                message: `Sorry! No results found!`,
+                duration: 3000,
+                position: 'bottom'
+              });
+              toast.present();
+            } else {
+              this.empty = false;
+            }
           }
 
           if (this.page === this.totalPages) {
@@ -97,6 +116,8 @@ export class CausesPage {
             this.showInfiniteScroll = true;
           }
 
+          if (ref)
+            ref.complete();
           this.busy = false;
 
         });
@@ -139,6 +160,11 @@ export class CausesPage {
         }
       }
     });
+  }
+
+  dorefresh(refresher) {
+    this.page = 1;
+    this.getCauses(false, null, refresher);
   }
 
 }

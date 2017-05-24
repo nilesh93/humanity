@@ -1,3 +1,4 @@
+import { SlidesModule } from './../pages/slides/slides.module';
 import { AboutModule } from './../pages/about/about.module';
 import { CLOUD_CONFIG } from './../config/auth';
 import { UserReducer } from './../reducers/user.reducer';
@@ -30,8 +31,8 @@ import { DonationService } from '../services/donation.service';
 import { IonicImageLoader } from 'ionic-image-loader';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { StoreModule } from '@ngrx/store';
-
-
+import { Facebook } from '@ionic-native/facebook';
+import { Deeplinks } from '@ionic-native/deeplinks';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { StoreModule } from '@ngrx/store';
     IonicImageLoader.forRoot(),
     LazyLoadImageModule,
     StoreModule.provideStore({ user: UserReducer }),
-    AboutModule
+    AboutModule,
+    SlidesModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -74,7 +76,9 @@ import { StoreModule } from '@ngrx/store';
     UserService,
     AdvertisementService,
     CauseService,
-    DonationService
+    DonationService,
+    Facebook,
+    Deeplinks
   ]
 })
 export class AppModule { }

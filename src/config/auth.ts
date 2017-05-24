@@ -6,7 +6,7 @@ export const CLOUD_CONFIG: CloudSettings = {
     },
     'auth': {
         'google': {
-            'webClientId': '21224678271-8lj1g8mmmnha3e1v7pp74fljr1arhugr.apps.googleusercontent.com',
+            'webClientId': '445455096398-t5apmmdaefk14mbh3d76b8buprftllvv.apps.googleusercontent.com',
             'scope': []
         },
         'facebook': {

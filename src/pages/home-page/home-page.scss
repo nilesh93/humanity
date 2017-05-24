@@ -8,6 +8,7 @@ page-home-page {
         ion-card {
             position: relative;
             text-align: center;
+            height: 14rem;
         }
 
         .card-title {
@@ -23,8 +24,12 @@ page-home-page {
                 margin-bottom: 0px !important;
             }
 
-            h1 {
+            h2 {
                 color: white;
+            }
+
+            p {
+                color: #f4f4f4;
             }
         }
 

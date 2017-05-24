@@ -1,3 +1,4 @@
+import { Slides } from './../slides/slides';
 import { AboutPage } from './../about/about';
 import { UserState } from './../../reducers/user.reducer';
 import { UserService } from './../../services/user.service';
@@ -50,6 +51,10 @@ export class SideMenu {
       case 'About':
         let profileModal = this.modalCtrl.create(AboutPage, {});
         profileModal.present();
+        break;
+      case 'Help':
+        let slideModal = this.modalCtrl.create(Slides, { fromMenu: true });
+        slideModal.present();
         break;
     }
   }

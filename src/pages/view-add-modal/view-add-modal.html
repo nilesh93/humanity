@@ -18,9 +18,9 @@
 </ion-header>
 
 
-<ion-content >
+<ion-content>
   <ion-list *ngIf="advert._company">
-    <ion-item >
+    <ion-item>
       <ion-avatar item-left>
         <img [src]="imgUrl">
       </ion-avatar>
@@ -28,16 +28,15 @@
       <h3>{{advert._company.name}}</h3>
     </ion-item>
   </ion-list>
-  <div *ngIf="advert._company">  
-  <video *ngIf="videoUrl" [controls]="true" preload="metadata" [autoplay]="false" 
-  (ended)="onPlayEnd()" class="videoPlayer">
-    <source [src]="videoUrl" type="video/mp4" />
-  </video>
-  <img *ngIf="!videoUrl" src="assets/img/video-not-available.gif" class="videoPlayer" alt="">
+  <div *ngIf="advert._company">
+    <video *ngIf="videoUrl" [controls]="true" preload="metadata" [autoplay]="false" (ended)="onPlayEnd()" class="videoPlayer">
+      <source [src]="videoUrl" type="video/mp4" />
+    </video>
+    <img *ngIf="!videoUrl" src="assets/img/video-not-available.gif" class="videoPlayer" alt="">
   </div>
   <ion-list *ngIf="advert._company">
     <ion-item *ngIf="!available.status">
-      <button ion-button block round outline color="primary">Watch again after {{available.available_in | date}}</button>
+      <button ion-button block round outline color="primary">Watch again after {{available.available_in | date}} </button>
     </ion-item>
     <ion-item *ngIf="available.status" no-lines>
       <button ion-button block round outline color="md-blue">Watch now and earn Rs.{{advert.price_per_view | number:'1.2-2'}}</button>

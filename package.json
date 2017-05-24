@@ -19,6 +19,8 @@
         "@angular/platform-browser": "4.0.0",
         "@angular/platform-browser-dynamic": "4.0.0",
         "@ionic-native/core": "^3.10.3",
+        "@ionic-native/deeplinks": "^3.10.3",
+        "@ionic-native/facebook": "^3.10.3",
         "@ionic-native/file": "^3.10.3",
         "@ionic-native/keyboard": "^3.10.3",
         "@ionic-native/keychain": "^3.8.0",
@@ -30,16 +32,17 @@
         "@ionic/storage": "^2.0.1",
         "@ngrx/core": "^1.2.0",
         "@ngrx/store": "^2.2.2",
+        "angular2-simple-countdown": "0.0.6",
         "chart.js": "^2.5.0",
         "cordova-android": "^6.2.3",
         "cordova-ios": "^4.4.0",
         "cordova-plugin-compat": "^1.1.0",
         "cordova-plugin-console": "1.0.5",
         "cordova-plugin-device": "1.1.4",
-        "cordova-plugin-facebook4": "^1.7.4",
+        "cordova-plugin-facebook4": "^1.9.0",
         "cordova-plugin-file": "^4.3.3",
         "cordova-plugin-file-transfer": "^1.6.3",
-        "cordova-plugin-googleplus": "~5.1.1",
+        "cordova-plugin-googleplus": "git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git",
         "cordova-plugin-ios-keychain": "^3.0.1",
         "cordova-plugin-splashscreen": "~4.0.1",
         "cordova-plugin-statusbar": "2.2.1",
@@ -49,6 +52,7 @@
         "es6-promise-plugin": "^4.1.0",
         "ionic-angular": "3.0.1",
         "ionic-image-loader": "^3.2.0",
+        "ionic-plugin-deeplinks": "^1.0.15",
         "ionic-plugin-keyboard": "~2.2.1",
         "ionicons": "3.0.0",
         "ng-lazyload-image": "^3.1.1",
@@ -83,22 +87,40 @@
         "plugins": {
             "cordova-plugin-console": {},
             "cordova-plugin-device": {},
-            "cordova-plugin-googleplus": {
-                "REVERSED_CLIENT_ID": "com.googleusercontent.apps.970264307804-sb6ku83dttqbia7f8kf912jqbjrofgg6"
-            },
             "cordova-plugin-splashscreen": {},
             "cordova-plugin-statusbar": {},
             "cordova-plugin-whitelist": {},
             "ionic-plugin-keyboard": {},
-            "cordova-plugin-facebook4": {
-                "APP_ID": "1942147749338571",
-                "APP_NAME": "Humanity"
-            },
             "cordova-plugin-ios-keychain": {},
             "cordova-sqlite-storage": {},
             "cordova-plugin-x-socialsharing": {},
             "cordova-plugin-file": {},
-            "cordova-plugin-file-transfer": {}
+            "cordova-plugin-file-transfer": {},
+            "cordova-plugin-googleplus": {
+                "REVERSED_CLIENT_ID": "com.googleusercontent.apps.1089716776383-t7hnjgckophko23ku6jqtk098e3r9d51"
+            },
+            "cordova-plugin-facebook4": {
+                "APP_ID": "1942147749338571",
+                "APP_NAME": "Humanity"
+            },
+            "ionic-plugin-deeplinks": {
+                "URL_SCHEME": "humanity",
+                "DEEPLINK_SCHEME": "http",
+                "DEEPLINK_HOST": "humanity-api.apps.reactive-solutions.com",
+                "ANDROID_PATH_PREFIX": "/",
+                "ANDROID_2_PATH_PREFIX": "/",
+                "ANDROID_3_PATH_PREFIX": "/",
+                "ANDROID_4_PATH_PREFIX": "/",
+                "ANDROID_5_PATH_PREFIX": "/",
+                "DEEPLINK_2_SCHEME": " ",
+                "DEEPLINK_2_HOST": " ",
+                "DEEPLINK_3_SCHEME": " ",
+                "DEEPLINK_3_HOST": " ",
+                "DEEPLINK_4_SCHEME": " ",
+                "DEEPLINK_4_HOST": " ",
+                "DEEPLINK_5_SCHEME": " ",
+                "DEEPLINK_5_HOST": " "
+            }
         },
         "platforms": [
             "android",

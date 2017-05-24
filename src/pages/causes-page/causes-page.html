@@ -20,7 +20,7 @@
 
     </ion-navbar>
     <ion-toolbar color="md-blue" *ngIf="showSubHeader">
-        <ion-searchbar [(ngModel)]="searchText" [showCancelButton]="true" (search)="onInput($event)"  (ionCancel)="onCancel($event)"
+        <ion-searchbar [(ngModel)]="searchText" [showCancelButton]="true" (search)="onInput($event)" (ionCancel)="onCancel($event)"
             animated="true" color="md-blue">
         </ion-searchbar>
     </ion-toolbar>
@@ -29,39 +29,40 @@
 </ion-header>
 
 
-<ion-content #contentRef style="background-color:#F5F5F5" class="card-background-page" (ionScroll)="scrollingDetect($event)">
+<ion-content #contentRef overflow-scroll="false" style="background-color:#F5F5F5" class="card-background-page" (ionScroll)="scrollingDetect($event)">
+
+    <ion-refresher (ionRefresh)="dorefresh($event)" color="md-blue">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
 
 
+    
+    <!---->
+    <a ion-card (click)="gotocause_details(item._id)"  *ngFor="let item of causes">
 
-    <ion-card *ngFor="let item of causes">
 
+        <ion-row>
+            <ion-col>
+                <ion-card style="margin-bottom: 0cm !important;">
+                    <img [src]="item.img" style="height:100%" />
+                    <!--<img defaultImage="assets/img/lazy.jpg" [lazyLoad]="item.img" [offset]="offset">-->
+                    <ion-item class="card-title">
 
-        <img [src]="item.img" />
-        <!--<img defaultImage="assets/img/lazy.jpg" [lazyLoad]="item.img" [offset]="offset">-->
-        <ion-item class="card-title">
-
-            <h1>{{item.title}}</h1>
-            <p>{{item.date_created | date}}</p>
-            <p>{{item.description}}</p>
-            <button ion-button round color="md-blue">Rs {{(item.target - item.recieved) | number:'1.2-2'}} needed</button>
-            <button ion-button round [outline]="item.watched_by.length == 0" icon-left color="md-light">
+                        <h2>{{item.title}}</h2>
+                        <p>{{item.date_created | date}}</p>
+                        <p>{{item.description}}</p>
+                        <button ion-button round color="md-blue">Rs {{(item.target - item.recieved) | number:'1.2-2'}} needed</button>
+                        <button ion-button round [outline]="item.watched_by.length == 0" icon-left color="md-light">
                  <ion-icon name="heart"></ion-icon>
                     <div>{{item.watched_by.length}} Watching</div>
             </button>
 
-        </ion-item>
-
-        <ion-row>
-
-
-            <button ion-button block clear color="md-dark" (click)="gotocause_details(item._id)">
-       
-        More Details
-        
-      </button>
-
+                    </ion-item>
+                </ion-card>
+            </ion-col>
         </ion-row>
-    </ion-card>
+
+    </a>
 
     <ion-infinite-scroll *ngIf="showInfiniteScroll" (ionInfinite)="lazyLoad($event)">
         <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more Causes...">

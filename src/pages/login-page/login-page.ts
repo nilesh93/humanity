@@ -1,7 +1,9 @@
+import { Slides } from './../slides/slides';
+import { UPDATE_USER } from './../../reducers/user.reducer';
 import { UserService } from './../../services/user.service';
 import { SideMenu } from './../side-menu/side-menu';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { GoogleAuth, User, FacebookAuth, Auth } from '@ionic/cloud-angular';
 import { Storage } from '@ionic/storage';
 
@@ -32,7 +34,8 @@ export class LoginPage {
     private storage: Storage,
     private alertCtrl: AlertController,
     private userService: UserService,
-    private auth: Auth) {
+    private auth: Auth,
+    public loadingCtrl: LoadingController) {
     this.auth.logout();
   }
 
@@ -40,23 +43,17 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
   doLogin() {
-    this.navCtrl.setRoot(SideMenu, {}, { animate: true, direction: 'forward' });
+    this.navCtrl.setRoot(Slides, {}, { animate: true, direction: 'forward' });
   }
 
 
   facebook() {
     this.facebookAuth.login().then((data) => {
-      console.log("****** LOGGED IN *****");
-      console.log(data);
-      console.log("****** USER *****");
-      console.log(this.user.social.facebook);
+      let loading = this.loadingCtrl.create({
+        content: 'Please wait...'
+      });
 
-      this.storage.set('user', new NativeUser(
-        this.user.social.facebook.data.full_name,
-        this.user.social.facebook.data.profile_picture,
-        this.user.social.facebook.uid,
-        this.user.social.facebook.data.email
-      ));
+      loading.present();
 
       if (data.signup) {
         this.userService.saveUser({
@@ -64,33 +61,55 @@ export class LoginPage {
           email: this.user.social.facebook.data.email,
           img: this.user.social.facebook.data.profile_picture,
           facebook: this.user.social.facebook.uid
-        }).subscribe((data) => {
-          console.log(data);
+        }).subscribe((data: any) => {
+          this.userService.dispatch(UPDATE_USER, data.data);
+          this.user.set('id', data.data._id);
+          this.user.save();
+          alert(JSON.stringify(data.data._id));
+          loading.dismiss();
+          this.doLogin();
         });
+      } else {
+        this.userService.getUser(this.user.get('id', null))
+          .subscribe((data: any) => {
+            this.userService.dispatch(UPDATE_USER, data.user);
+            loading.dismiss();
+            this.doLogin();
+          });
       }
-
-      this.doLogin();
-
-
-    }, (data) => {
-      console.log('**** ERROR *****');
-      console.log(JSON.stringify(data));
-      let alert = this.alertCtrl.create({
-        title: 'Invalid Login',
-        subTitle: data,
-        buttons: ['Dismiss']
-      });
-      alert.present();
-      this.testlogin();
-    });
+    }, this.errHandler);
   }
 
   google() {
-    this.testlogin();
-    // this.googleAuth.login().then((data) => {
-    //   console.log(data);
-    //   this.doLogin();
-    // }, this.errHandler.bind(this));
+    this.googleAuth.login().then((data) => {
+
+      let loading = this.loadingCtrl.create({
+        content: 'Please wait...'
+      });
+
+      loading.present();
+      if (data.signup) {
+        this.userService.saveUser({
+          name: this.user.social.google.data.full_name,
+          email: this.user.social.google.data.email,
+          img: this.user.social.google.data.profile_picture,
+          google: this.user.social.google.uid
+        }).subscribe((data: any) => {
+          this.userService.dispatch(UPDATE_USER, data.data);
+          this.user.set('id', data.data._id);
+          this.user.save();
+          loading.dismiss();
+          this.doLogin();
+        });
+      } else {
+        this.userService.getUser(this.user.get('id', null))
+          .subscribe((data: any) => {
+            this.userService.dispatch(UPDATE_USER, data.user);
+            loading.dismiss();
+            this.doLogin();
+          });
+      }
+    }, this.errHandler.bind(this));
   }
 
   errHandler(data) {
@@ -102,29 +121,11 @@ export class LoginPage {
     //   buttons: ['Dismiss']
     // });
     // alert.present();
-    this.testlogin();
+    alert(JSON.stringify(data));
+
   }
 
   testlogin() {
-    this.storage.set('user', new NativeUser(
-      'Nilesh Jayanandana',
-      'https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/13906904_10210387323542249_3331820178298643532_n.jpg?oh=544be5cd948e81867d801b42768e08fc&oe=59C27F18',
-      '10213224138460849',
-      'nileshjayanandana@yahoo.com'
-    ));
-
-    // this.userService.saveUser({
-    //   name: 'Nilesh Jayanandana',
-    //   img: 'https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/13906904_10210387323542249_3331820178298643532_n.jpg?oh=544be5cd948e81867d801b42768e08fc&oe=59C27F18',
-    //   email: 'nileshjayanandana@yahoo.com',
-    //   facebook: '10213224138460849'
-    // }).subscribe((data) => {
-    //   console.log(data);
-    // }, (err) => {
-    //   console.log("error user save **************");
-    //   console.log(JSON.stringify(err));
-    //   // this.storage.set('id', );
-    // });
     this.doLogin();
   }
 }

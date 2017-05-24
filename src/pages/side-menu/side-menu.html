@@ -12,7 +12,7 @@
                 </ion-avatar>
                 <h2>Hello</h2>
                 <h3>{{user.name}}</h3>
-                <button ion-button block round outline color="md-blue"> Rs.{{user.points |  number:'1.2-2'}}</button>
+                <button ion-button block round color="md-blue"> Rs.{{user.points |  number:'1.2-2'}}</button>
             </a>
 
             <ion-list-header>
@@ -22,14 +22,15 @@
                 Home
                 <ion-icon name="ios-arrow-forward-outline" item-right></ion-icon>
             </a>
-            <a (click)="navigate('Causes')" ion-item menuClose>
-                Causes
-                <ion-icon name="ios-arrow-forward-outline" item-right></ion-icon>
-            </a>
             <a (click)="navigate('Advertisments')" ion-item menuClose>
                 Earn Cause Points
                 <ion-icon name="ios-arrow-forward-outline" item-right></ion-icon>
             </a>
+            <a (click)="navigate('Causes')" ion-item menuClose>
+                Causes
+                <ion-icon name="ios-arrow-forward-outline" item-right></ion-icon>
+            </a>
+
 
             <a (click)="navigate('Leaderboard')" ion-item menuClose>
                 Leaderboards
@@ -40,17 +41,20 @@
                 <ion-icon name="ios-arrow-forward-outline" item-right></ion-icon>
             </a>
 
-            <ion-item>
+            <!--<ion-item>
                 <ion-label>Notifications</ion-label>
                 <ion-toggle [(ngModel)]="notification" color="md-blue"></ion-toggle>
-            </ion-item>
+            </ion-item>-->
 
 
 
             <ion-list-header>
                 Explore
             </ion-list-header>
-         
+            <a (click)="navigate('Help')" ion-item menuClose>
+                Help
+                <ion-icon name="ios-arrow-forward-outline" item-right></ion-icon>
+            </a>
             <a (click)="navigate('About')" ion-item menuClose>
                 About Us
                 <ion-icon name="ios-arrow-forward-outline" item-right></ion-icon>
@@ -58,9 +62,9 @@
 
         </ion-list>
 
- 
+
     </ion-content>
 </ion-menu>
 
 
-<ion-nav [root]="sideBarPage" #content swipeBackEnabled="true" ></ion-nav>
+<ion-nav [root]="sideBarPage" #content></ion-nav>

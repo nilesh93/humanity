@@ -9,7 +9,8 @@ import { Observable } from "rxjs/Observable";
 @Injectable()
 export class UserService {
 
-    public id: string = "591c01047840a58abb87f365";
+    // = "591c01047840a58abb87f365"
+    public id: string;
     public amount: number;
     public userInfo: Observable<Object>;
 
@@ -25,8 +26,9 @@ export class UserService {
     }
 
 
-    getUser() {
-        return this.http.get(`${URL_CONST.HOST}/user/view/${this.id}`, this.getHeaders())
+    getUser(id = null) {
+        let user_id = id ? id : this.id;
+        return this.http.get(`${URL_CONST.HOST}/user/view/${user_id}`, this.getHeaders())
             .map((response) => response.json())
             .catch(this.handleError);
     }

@@ -3,8 +3,7 @@ import { UserService } from './../../services/user.service';
 import { AdvertisementService } from './../../services/advertisement.service';
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, ToastController, LoadingController } from 'ionic-angular';
-import { } from "../../reducers/user.reducer";
-
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 @IonicPage()
 @Component({
@@ -26,7 +25,8 @@ export class ViewAddModal {
     private advertisementService: AdvertisementService,
     private zone: NgZone, private userService: UserService,
     private toastCtrl: ToastController,
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl: LoadingController,
+    private fb: Facebook) {
 
     let loading = this.loadingCtrl.create({
       content: 'Please wait...'
@@ -35,6 +35,15 @@ export class ViewAddModal {
     loading.present();
 
     this.id = this.navParams.get('addId');
+    this.getAdd(loading);
+
+    // this.fb.login(['public_profile', 'user_friends', 'email'])
+    //   .then((res: FacebookLoginResponse) => console.log('Logged into Facebook!', res))
+    //   .catch(e => console.log('Error logging into Facebook', e));
+
+  }
+
+  getAdd(loading = null) {
     this.advertisementService.viewAdvertisement(this.id, this.userService.id)
       .subscribe((data: any) => {
         this.zone.run(() => {
@@ -43,12 +52,12 @@ export class ViewAddModal {
           this.videoUrl = data.add.video_url || null;
           this.advert = data.add;
           this.available = data.availability;
-          loading.dismiss();
+          if (loading)
+            loading.dismiss();
 
         });
       });
   }
-
   ionViewDidLoad() {
 
   }
@@ -64,6 +73,7 @@ export class ViewAddModal {
       .subscribe((data: any) => {
         if (data.status) {
           this.userService.dispatch(ADD_POINTS, this.advert.price_per_view);
+          this.getAdd();
           let toast = this.toastCtrl.create({
             message: `Earned ${this.advert.price_per_view} Points!`,
             duration: 3000,

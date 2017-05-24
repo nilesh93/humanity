@@ -1,9 +1,11 @@
+import { CauseDetails } from './../cause-details/cause-details';
 import { UPDATE_USER } from './../../reducers/user.reducer';
 import { UserService } from './../../services/user.service';
 import { Color } from 'ng2-charts';
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { CauseService } from "../../services/causes.service";
 
 @IonicPage()
 @Component({
@@ -23,14 +25,19 @@ export class HomePage {
   rank: number = 0;
   colorsEmptyObject: Array<Color> = [{}];
   datasets: any[] = [];
+  causes: Array<any> = [];
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private storage: Storage,
     private userService: UserService,
-    private zone: NgZone) {
+    private zone: NgZone,
+    private causeService: CauseService,
+    public modalCtrl: ModalController, ) {
+
 
     this.load();
+    this.getCauses();
   }
 
   ionViewDidLoad() {
@@ -85,4 +92,17 @@ export class HomePage {
 
   }
 
+  getCauses() {
+    this.causeService.getCauses(1, this.userService.id, '', '')
+      .subscribe((data: any) => {
+        this.causes = data.data.docs.splice(0, 5);
+      })
+  }
+
+  gotocause_details(id) {
+
+    let profileModal = this.modalCtrl.create(CauseDetails, { causeId: id });
+
+    profileModal.present();
+  }
 }

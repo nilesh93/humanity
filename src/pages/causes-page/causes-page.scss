@@ -3,7 +3,7 @@ page-causes-page {
         margin: 0px !important;
         width: 100% !important;
         margin-bottom: 8px !important;
-        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(255, 255, 255, 0) !important;
+        // box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(255, 255, 255, 0) !important;
     }
 
     .numberCircle {
@@ -49,11 +49,12 @@ page-causes-page {
         ion-card {
             position: relative;
             text-align: center;
+            height:14rem;
         }
 
         .card-title {
             position: absolute;
-            bottom: 21%;
+            bottom: 0;
             font-size: 2.0em;
             width: 100%;
             font-weight: bold;
@@ -61,10 +62,10 @@ page-causes-page {
             background: rgba(0, 0, 0, 0.14) !important;
 
             ion-label {
-                margin-bottom: 0px !important;
+                // margin-bottom: 0px !important;
             }
 
-            h1 {
+            h2 {
                 color: white;
             }
         }

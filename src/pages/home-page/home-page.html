@@ -26,211 +26,142 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>-->
 
-  <ion-row>
-    <ion-slides>
-      <ion-slide>
-        <ion-card class="card-background-page">
-          <img [src]="'https://s32.postimg.org/793vtvt0l/ede24af7a32fd73abdd74151342f32ea.jpg'" />
-          <ion-item class="card-title">
 
-            <h1>Help a Cat</h1>
-            <p>20120. asds</p>
-            <p>asdsd sds</p>
-            <button ion-button round color="md-blue">Rs 1000 needed</button>
-            <!--<button ion-button round [outline]="item.watched_by.length == 0" icon-left color="md-light">
-                 <ion-icon name="heart"></ion-icon>
-                    <div>{{item.watched_by.length}} Watching</div>
-            </button>-->
-          </ion-item>
-        </ion-card>
-      </ion-slide>
-      <ion-slide>
-        <ion-card class="card-background-page">
-          <img [src]="'https://s32.postimg.org/793vtvt0l/ede24af7a32fd73abdd74151342f32ea.jpg'" />
-          <ion-item class="card-title">
-
-            <h1>Help a Cat</h1>
-            <p>20120. asds</p>
-            <p>asdsd sds</p>
-            <button ion-button round color="md-blue">Rs 1000 needed</button>
-            <!--<button ion-button round [outline]="item.watched_by.length == 0" icon-left color="md-light">
-                 <ion-icon name="heart"></ion-icon>
-                    <div>{{item.watched_by.length}} Watching</div>
-            </button>-->
-          </ion-item>
-        </ion-card>
-      </ion-slide>
-      <ion-slide>
-        <ion-card class="card-background-page">
-          <img [src]="'https://s32.postimg.org/793vtvt0l/ede24af7a32fd73abdd74151342f32ea.jpg'" />
-          <ion-item class="card-title">
-
-            <h1>Help a Cat</h1>
-            <p>20120. asds</p>
-            <p>asdsd sds</p>
-            <button ion-button round color="md-blue">Rs 1000 needed</button>
-            <!--<button ion-button round [outline]="item.watched_by.length == 0" icon-left color="md-light">
-                 <ion-icon name="heart"></ion-icon>
-                    <div>{{item.watched_by.length}} Watching</div>
-            </button>-->
-          </ion-item>
-        </ion-card>
-      </ion-slide>
-    </ion-slides>
-  </ion-row>
-  <ion-row>
-    <ion-col>
-      <ion-card style="margin-bottom:0cm !important">
-        <!--<ion-card-header  style="font-size:90%;padding-bottom:0cm">
-    Hello, Welcome Back!
-    </ion-card-header>-->
-        <ion-list>
-          <ion-item>
-            <ion-avatar item-left padding>
-              <img [src]="img">
-            </ion-avatar>
-            <h2>{{userDetails.name}}</h2>
-            <p> {{dateJoined}} </p>
-            <button ion-button round outline color="md-blue">Rs {{userDetails.points |  number:'1.2-2'}}</button>
-          </ion-item>
-        </ion-list>
-      </ion-card>
-    </ion-col>
-  </ion-row>
-
-
-  <ion-row>
-    <ion-col col-6>
-      <ion-card style="margin-bottom:0cm !important">
-        <ion-card-header style="font-size:90%">
-          Statistics
-        </ion-card-header>
-        <ion-card-content style="padding-bottom:0cm">
-
-          <ion-row *ngIf="userDetailsDidLoad">
-            <div col-12>
-              <div style="display: block;">
-                <canvas baseChart [legend]="false" [labels]="labels" [datasets]="datasets" [colors]="colorsEmptyObject" [chartType]="type"></canvas>
-              </div>
-
-
-              <ion-row>
-                <div col-3>
-                  <div style="background-color:#BDBDBD;width:100%; height:15px"></div>
-                </div>
-                <div col-9>
-                  <h5> Earned </h5>
-                </div>
-              </ion-row>
-              <ion-row>
-                <div col-3>
-                  <div style="background-color:#2196F3;width:100%; height:15px"></div>
-                </div>
-                <div col-9>
-                  <h5> Donated </h5>
-                </div>
-              </ion-row>
-            </div>
-
-          </ion-row>
-
-
-        </ion-card-content>
-
-      </ion-card>
-    </ion-col>
-
-    <ion-col>
-      <ion-card color="md-blue">
-        <ion-card-header style="font-size:90%">
-          Total Donations
-        </ion-card-header>
-        <ion-card-content>
-          <h3> <small>RS</small> </h3>
-          <h1>{{userDetails.total_points | number:'1.2-2'}}</h1>
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card color="grey" style="margin-bottom:0cm !important">
-        <ion-card-header style="font-size:90%">
-          Total Earnings
-        </ion-card-header>
-        <ion-card-content>
-          <h3> <small>RS</small> </h3>
-          <h1>{{userDetails.total_donations | number:'1.2-2'}}</h1>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
 
 
   <ion-row>
     <ion-col>
+      <ion-slides>
+        <ion-slide *ngFor="let item of causes">
+          <ion-card class="card-background-page"   (click)="gotocause_details(item._id)">
 
+            <img [src]="item.img" style="height:100%; width:100%;min-height:17rem; max-height:17rem" />
+            <ion-item class="card-title" padding>
+
+              <h2>{{item.title}}</h2>
+              <p>{{item.date_created | date}}</p>
+              <p>{{item.description}}</p>
+              <button ion-button round color="md-blue">Rs {{(item.target - item.recieved) | number:'1.2-2'}} needed</button>
+
+            </ion-item>
+          </ion-card>
+        </ion-slide>
+
+      </ion-slides>
     </ion-col>
-    <ion-col>
-
-    </ion-col>
-
-
-  </ion-row>
-
-  <ion-row>
-    <ion-col>
-      <ion-card color="yellow" style="margin-bottom:0cm !important">
-        <ion-card-header style="font-size:90%">
-          Accomplishments
-        </ion-card-header>
-        <ion-card-content>
-
-
-          <h1 style="font-size:250%">10</h1>
-
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-    <ion-col>
-      <ion-card color="pink" style="margin-bottom:0cm !important">
-        <ion-card-header style="font-size:90%">
-          Humanity Rank
-        </ion-card-header>
-        <ion-card-content>
-
-          <h1 style="font-size:250%;">{{rank}}</h1>
-
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-
-
   </ion-row>
 
   <ion-row>
     <ion-col>
       <ion-card>
-        <ion-card-header>
-          Accomplishments
-        </ion-card-header>
-        <ion-list padding style="padding-top:0px">
-          <ion-item>
+        <ion-row>
 
-            <ion-icon name="trophy" item-left></ion-icon>
+          <ion-col>
+            <ion-card>
+              <ion-list>
+                <ion-item color="light">
+                  <ion-avatar item-left padding>
+                    <img [src]="img">
+                  </ion-avatar>
+                  <h2>{{userDetails.name}}</h2>
+                  <p> {{dateJoined}} </p>
+                  <button ion-button round outline color="md-blue">Rs {{userDetails.points |  number:'1.2-2'}}</button>
+                </ion-item>
+              </ion-list>
+            </ion-card>
+          </ion-col>
+          <!--<ion-col>
+            <ion-card color="pink" style="margin-bottom:0cm !important">
+              <ion-card-header style="font-size:90%">
+                Humanity Rank
+              </ion-card-header>
+              <ion-card-content>
 
-            <h2>Mahatma Ghandi</h2>
-            <p> Donated Rs. 50,000</p>
-          </ion-item>
-          <ion-item>
+                <h1 style="font-size:250%;">{{rank}}</h1>
 
-            <ion-icon name="trophy" item-left></ion-icon>
-
-            <h2>BussinessMan</h2>
-            <p> Earned Rs. 50,000</p>
-          </ion-item>
-
-        </ion-list>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>-->
 
 
+        </ion-row>
       </ion-card>
     </ion-col>
   </ion-row>
+
+  <!--stats-->
+  <ion-row>
+    <ion-col>
+      <ion-card>
+        <ion-row>
+          <ion-col col-6>
+
+
+            <ion-card-content style="padding-bottom:0cm">
+
+              <ion-row *ngIf="userDetailsDidLoad">
+                <div col-12>
+                  <div style="display: block;">
+                    <canvas baseChart [legend]="false" [labels]="labels" [datasets]="datasets" [colors]="colorsEmptyObject" [chartType]="type"></canvas>
+                  </div>
+
+
+                  <ion-row>
+                    <div col-3>
+                      <div style="background-color:#BDBDBD;width:100%; height:15px"></div>
+                    </div>
+                    <div col-9>
+                      <h5> Earned </h5>
+                    </div>
+                  </ion-row>
+                  <ion-row>
+                    <div col-3>
+                      <div style="background-color:#2196F3;width:100%; height:15px"></div>
+                    </div>
+                    <div col-9>
+                      <h5> Donated </h5>
+                    </div>
+                  </ion-row>
+                </div>
+
+              </ion-row>
+
+
+            </ion-card-content>
+
+
+          </ion-col>
+
+          <ion-col>
+            <ion-card color="md-blue" style="">
+              <ion-card-header style="font-size:90%">
+                Total Donations
+              </ion-card-header>
+              <ion-card-content>
+                <h3> <small>RS</small> </h3>
+                <h1>{{userDetails.total_donations | number:'1.2-2'}}</h1>
+              </ion-card-content>
+            </ion-card>
+
+            <ion-card color="grey" style="margin-bottom:0cm !important">
+              <ion-card-header style="font-size:90%">
+                Total Earnings
+              </ion-card-header>
+              <ion-card-content>
+                <h3> <small>RS</small> </h3>
+                <h1>{{userDetails.total_points | number:'1.2-2'}}</h1>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <!--stats-end-->
+
+
+
+
+
+
 </ion-content>
