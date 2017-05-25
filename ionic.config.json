@@ -7,6 +7,5 @@
       "proxyUrl": "http://humanity-api.apps.reactive-solutions.xyz/"
     }
   ],
-  "v2": true,
-  "typescript": true 
+  "type": "ionic-angular"
 }

@@ -3,7 +3,7 @@ import { UserService } from './../../services/user.service';
 import { AdvertisementService } from './../../services/advertisement.service';
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, ToastController, LoadingController } from 'ionic-angular';
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { Facebook } from '@ionic-native/facebook';
 
 @IonicPage()
 @Component({

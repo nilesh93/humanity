@@ -1,8 +1,7 @@
-import { Slides } from './../pages/slides/slides';
+
 import { CauseDetails } from './../pages/cause-details/cause-details';
 import { AboutPage } from './../pages/about/about';
 import { Deeplinks } from '@ionic-native/deeplinks';
-import { SideMenu } from './../pages/side-menu/side-menu';
 import { LoginPage } from './../pages/login-page/login-page';
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
@@ -38,7 +37,7 @@ export class MyApp {
         console.log('Successfully matched route', match);
       }, (nomatch) => {
         // nomatch.$link - the full link data
-        
+
         console.error('Got a deeplink that didn\'t match', nomatch);
       });
     });

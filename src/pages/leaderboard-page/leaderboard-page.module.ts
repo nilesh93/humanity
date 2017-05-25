@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { IonicModule, IonicPageModule } from 'ionic-angular';
+import { IonicPageModule } from 'ionic-angular';
 import { LeaderboardPage } from './leaderboard-page';
 
 @NgModule({
@@ -13,4 +13,4 @@ import { LeaderboardPage } from './leaderboard-page';
     LeaderboardPage
   ]
 })
-export class LeaderboardPageModule {}
+export class LeaderboardPageModule { }

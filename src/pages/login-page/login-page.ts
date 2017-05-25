@@ -1,7 +1,6 @@
 import { Slides } from './../slides/slides';
 import { UPDATE_USER } from './../../reducers/user.reducer';
 import { UserService } from './../../services/user.service';
-import { SideMenu } from './../side-menu/side-menu';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { GoogleAuth, User, FacebookAuth, Auth } from '@ionic/cloud-angular';
