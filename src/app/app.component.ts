@@ -1,3 +1,7 @@
+import { UPDATE_USER } from './../reducers/user.reducer';
+import { UserService } from './../services/user.service';
+import { SideMenu } from './../pages/side-menu/side-menu';
+import { Auth, User } from '@ionic/cloud-angular';
 
 import { CauseDetails } from './../pages/cause-details/cause-details';
 import { AboutPage } from './../pages/about/about';
@@ -17,15 +21,33 @@ export class MyApp {
   constructor(platform: Platform,
     statusBar: StatusBar,
     splashScreen: SplashScreen,
-    private deeplinks: Deeplinks) {
+    private deeplinks: Deeplinks,
+    private auth: Auth,
+    private userService: UserService,
+    public user: User) {
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
 
-      this.rootPage = LoginPage;
+      statusBar.styleDefault();
+
+
+      if (this.auth.isAuthenticated()) {
+        this.userService.getUser(this.user.get('id', null))
+          .subscribe((data: any) => {
+            this.userService.dispatch(UPDATE_USER, data.user);
+            splashScreen.hide();
+            this.rootPage = SideMenu;
+          }, () => {
+            splashScreen.hide();
+            this.rootPage = LoginPage;
+          });
+
+      } else {
+        splashScreen.hide();
+        this.rootPage = LoginPage;
+      }
 
       this.deeplinks.route({
         '/about-us': AboutPage,

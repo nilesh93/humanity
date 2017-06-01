@@ -29,20 +29,20 @@
 
   <ion-list>
     
-    <ion-card *ngFor="let add of adds" style="margin-bottom:6px">
+ 
 
-      <a ion-item >
+      <a ion-item *ngFor="let add of adds"  >
 
-        <ion-avatar item-left>
+        <ion-avatar item-left >
           <img [src]="add._company.img">
         </ion-avatar>
-        <h2>{{add.title}}</h2>
-        <h3>{{add._company.name}}</h3>
+        <h3>{{add.title}}</h3>
+        <p>{{add._company.name}}</p>
         <button ion-button round outline color="md-blue">Rs {{add.price_per_view | number:'1.2-2'}} per view</button>
         <button ion-button outline color="md-dark" item-right (click)="viewAdd(add._id)" style="padding-left:1rem;padding-right:1rem;">Watch</button>
 
       </a>
-    </ion-card>
+   
   </ion-list>
 
 

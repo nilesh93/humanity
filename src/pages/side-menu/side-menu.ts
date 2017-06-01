@@ -1,3 +1,4 @@
+import { StatusBar } from '@ionic-native/status-bar';
 import { Slides } from './../slides/slides';
 import { AboutPage } from './../about/about';
 import { UserState } from './../../reducers/user.reducer';
@@ -26,7 +27,11 @@ export class SideMenu {
     private storage: Storage,
     private userService: UserService,
     private zone: NgZone,
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController,
+    private statusBar: StatusBar) {
+      
+    statusBar.backgroundColorByHexString('#2196F3');
+    this.statusBar.styleBlackOpaque();
     this.sideBarPage = HomePage;
     this.subscribe();
   }

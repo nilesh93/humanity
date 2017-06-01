@@ -1,8 +1,10 @@
+import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
+import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { ADD_POINTS } from './../../reducers/user.reducer';
 import { UserService } from './../../services/user.service';
 import { AdvertisementService } from './../../services/advertisement.service';
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, ToastController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
 
 @IonicPage()
@@ -25,21 +27,14 @@ export class ViewAddModal {
     private advertisementService: AdvertisementService,
     private zone: NgZone, private userService: UserService,
     private toastCtrl: ToastController,
-    public loadingCtrl: LoadingController,
+    private spinnerDialog: SpinnerDialog,
+    private streamingMedia: StreamingMedia,
     private fb: Facebook) {
 
-    let loading = this.loadingCtrl.create({
-      content: 'Please wait...'
-    });
-
-    loading.present();
+    this.spinnerDialog.show();
 
     this.id = this.navParams.get('addId');
-    this.getAdd(loading);
-
-    // this.fb.login(['public_profile', 'user_friends', 'email'])
-    //   .then((res: FacebookLoginResponse) => console.log('Logged into Facebook!', res))
-    //   .catch(e => console.log('Error logging into Facebook', e));
+    this.getAdd(true);
 
   }
 
@@ -53,7 +48,7 @@ export class ViewAddModal {
           this.advert = data.add;
           this.available = data.availability;
           if (loading)
-            loading.dismiss();
+            this.spinnerDialog.hide();
 
         });
       });
@@ -83,5 +78,16 @@ export class ViewAddModal {
 
         }
       });
+  }
+
+  watchVideo() {
+    let options: StreamingVideoOptions = {
+      successCallback: () => {
+        this.onPlayEnd();
+      },
+      errorCallback: (e) => { console.log('Error streaming') },
+      orientation: 'landscape'
+    };
+    this.streamingMedia.playVideo(this.videoUrl, options);
   }
 }

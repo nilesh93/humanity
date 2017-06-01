@@ -33,7 +33,10 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { StoreModule } from '@ngrx/store';
 import { Facebook } from '@ionic-native/facebook';
 import { Deeplinks } from '@ionic-native/deeplinks';
-
+import { SpinnerDialog } from '@ionic-native/spinner-dialog';
+import { Toast } from '@ionic-native/toast';
+import { Dialogs } from '@ionic-native/dialogs';
+import { StreamingMedia } from '@ionic-native/streaming-media';
 
 @NgModule({
   declarations: [
@@ -62,6 +65,7 @@ import { Deeplinks } from '@ionic-native/deeplinks';
     StoreModule.provideStore({ user: UserReducer }),
     AboutModule,
     SlidesModule
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -78,7 +82,11 @@ import { Deeplinks } from '@ionic-native/deeplinks';
     CauseService,
     DonationService,
     Facebook,
-    Deeplinks
+    Deeplinks,
+    SpinnerDialog,
+    Toast,
+    StreamingMedia,
+    Dialogs
   ]
 })
 export class AppModule { }

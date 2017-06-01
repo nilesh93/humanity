@@ -2,10 +2,12 @@ import { Slides } from './../slides/slides';
 import { UPDATE_USER } from './../../reducers/user.reducer';
 import { UserService } from './../../services/user.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { GoogleAuth, User, FacebookAuth, Auth } from '@ionic/cloud-angular';
 import { Storage } from '@ionic/storage';
-
+import { SpinnerDialog } from '@ionic-native/spinner-dialog';
+import { Toast } from '@ionic-native/toast';
+import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
 
 export class NativeUser {
   constructor(
@@ -34,12 +36,17 @@ export class LoginPage {
     private alertCtrl: AlertController,
     private userService: UserService,
     private auth: Auth,
-    public loadingCtrl: LoadingController) {
+    private spinnerDialog: SpinnerDialog,
+    private toast: Toast,
+    private streamingMedia: StreamingMedia
+  ) {
     this.auth.logout();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+
+
   }
   doLogin() {
     this.navCtrl.setRoot(Slides, {}, { animate: true, direction: 'forward' });
@@ -48,11 +55,7 @@ export class LoginPage {
 
   facebook() {
     this.facebookAuth.login().then((data) => {
-      let loading = this.loadingCtrl.create({
-        content: 'Please wait...'
-      });
-
-      loading.present();
+      this.spinnerDialog.show();
 
       if (data.signup) {
         this.userService.saveUser({
@@ -64,15 +67,15 @@ export class LoginPage {
           this.userService.dispatch(UPDATE_USER, data.data);
           this.user.set('id', data.data._id);
           this.user.save();
-          alert(JSON.stringify(data.data._id));
-          loading.dismiss();
+
+          this.spinnerDialog.hide();
           this.doLogin();
         });
       } else {
         this.userService.getUser(this.user.get('id', null))
           .subscribe((data: any) => {
             this.userService.dispatch(UPDATE_USER, data.user);
-            loading.dismiss();
+            this.spinnerDialog.hide();
             this.doLogin();
           });
       }
@@ -80,13 +83,10 @@ export class LoginPage {
   }
 
   google() {
+
     this.googleAuth.login().then((data) => {
 
-      let loading = this.loadingCtrl.create({
-        content: 'Please wait...'
-      });
-
-      loading.present();
+      this.spinnerDialog.show();
       if (data.signup) {
         this.userService.saveUser({
           name: this.user.social.google.data.full_name,
@@ -97,14 +97,14 @@ export class LoginPage {
           this.userService.dispatch(UPDATE_USER, data.data);
           this.user.set('id', data.data._id);
           this.user.save();
-          loading.dismiss();
+          this.spinnerDialog.hide();
           this.doLogin();
         });
       } else {
         this.userService.getUser(this.user.get('id', null))
           .subscribe((data: any) => {
             this.userService.dispatch(UPDATE_USER, data.user);
-            loading.dismiss();
+            this.spinnerDialog.hide();
             this.doLogin();
           });
       }
@@ -120,7 +120,7 @@ export class LoginPage {
     //   buttons: ['Dismiss']
     // });
     // alert.present();
-    alert(JSON.stringify(data));
+    // alert(JSON.stringify(data));
 
   }
 

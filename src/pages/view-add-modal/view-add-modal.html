@@ -39,7 +39,7 @@
       <button ion-button block round outline color="primary">Watch again after {{available.available_in | date}} </button>
     </ion-item>
     <ion-item *ngIf="available.status" no-lines>
-      <button ion-button block round outline color="md-blue">Watch now and earn Rs.{{advert.price_per_view | number:'1.2-2'}}</button>
+      <button ion-button block round outline color="md-blue" (click)="watchVideo()">Watch now and earn Rs.{{advert.price_per_view | number:'1.2-2'}}</button>
     </ion-item>
     <ion-list-header style="margin-bottom:0cm">
       Advertisement Details

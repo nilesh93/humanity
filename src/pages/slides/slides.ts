@@ -1,3 +1,4 @@
+import { StatusBar } from '@ionic-native/status-bar';
 import { SideMenu } from './../side-menu/side-menu';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
@@ -33,8 +34,15 @@ export class Slides {
       image: "assets/img/ica-slidebox-img-3.png",
     }
   ];
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public viewCtrl: ViewController,
+    private statusBar: StatusBar) {
     this.fromLogin = (this.navParams.get('fromMenu')) ? false : true;
+    if (this.fromLogin) {
+      statusBar.backgroundColorByHexString('#2196F3');
+      this.statusBar.styleBlackOpaque();
+    }
   }
 
   ionViewDidLoad() {
